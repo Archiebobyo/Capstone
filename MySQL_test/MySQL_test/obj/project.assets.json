@@ -5707,11 +5707,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jarl\\Documents\\Capstone\\MySQL_test\\MySQL_test\\MySQL_test.vbproj",
+      "projectUniqueName": "C:\\Users\\jarl\\source\\repos\\MySQL_test\\MySQL_test\\MySQL_test.vbproj",
       "projectName": "MySQL_test",
-      "projectPath": "C:\\Users\\jarl\\Documents\\Capstone\\MySQL_test\\MySQL_test\\MySQL_test.vbproj",
+      "projectPath": "C:\\Users\\jarl\\source\\repos\\MySQL_test\\MySQL_test\\MySQL_test.vbproj",
       "packagesPath": "C:\\Users\\jarl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jarl\\Documents\\Capstone\\MySQL_test\\MySQL_test\\obj\\",
+      "outputPath": "C:\\Users\\jarl\\source\\repos\\MySQL_test\\MySQL_test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5757,12 +5757,22 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.0.1, 3.0.1]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.0.3, 3.0.3]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
