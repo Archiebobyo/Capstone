@@ -35,3 +35,4 @@ C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.Log
 C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.MainMenuForm.resources
 C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.Resources.resources
 C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbproj.GenerateResource.Cache
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.currentInventoryForm.resources

@@ -59,5 +59,15 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property WIN_20200323_22_53_51_Pro() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("WIN_20200323_22_53_51_Pro", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
     End Module
 End Namespace
