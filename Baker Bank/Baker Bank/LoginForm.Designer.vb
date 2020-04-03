@@ -63,6 +63,7 @@ Partial Class LoginForm
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(173, 20)
         Me.TextBox1.TabIndex = 3
+        Me.TextBox1.Text = "jcamacho@uwf.edu"
         '
         'TextBox2
         '
@@ -70,6 +71,7 @@ Partial Class LoginForm
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(173, 20)
         Me.TextBox2.TabIndex = 4
+        Me.TextBox2.Text = "Josh"
         '
         'Button2
         '
@@ -80,7 +82,7 @@ Partial Class LoginForm
         Me.Button2.Text = "Login"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Login
+        'LoginForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -91,7 +93,7 @@ Partial Class LoginForm
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
-        Me.Name = "Login"
+        Me.Name = "LoginForm"
         Me.Text = "Login"
         Me.ResumeLayout(False)
         Me.PerformLayout()
