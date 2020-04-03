@@ -18,3 +18,20 @@ C:\Users\jarl\source\repos\Baker Bank\Baker Bank\obj\Debug\Baker Bank.xml
 C:\Users\jarl\source\repos\Baker Bank\Baker Bank\obj\Debug\Baker Bank.pdb
 C:\Users\jarl\source\repos\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.LoginForm.resources
 C:\Users\jarl\source\repos\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.MainMenuForm.resources
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.exe.config
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.exe
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.xml
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.pdb
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.exe
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.pdb
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.xml
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Google.Protobuf.dll
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\Renci.SshNet.dll
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\bin\Debug\MySql.Data.xml
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbprojResolveAssemblyReference.cache
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.LoginForm.resources
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.MainMenuForm.resources
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.Resources.resources
+C:\Users\Laptop_LB7GbFi4\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbproj.GenerateResource.Cache

@@ -1,0 +1,53 @@
+I was doing some thinking on what features should be available to the different user TYPES of the app.  
+Let me know what you think of the below:
+
+1.admin
+                1. warehouses (view, edit, add, delete)
+                2. Store (view, edit, add, delete)
+                3. warehouses (view, edit, add, delete)
+                4. Employee (view, edit, add, delete)
+
+2.store manager
+                1. view store inventory
+                2. inventory orders (view, edit, add, delete, approve, fulfilled)
+                3. customer orders (view, edit, add, delete, approve, fulfilled)
+                4. Employee (view, edit, add, delete)
+
+3.store employee
+                1. view store inventory (including other stores)
+                2. inventory orders (view, edit, add, delete, fulfilled)
+                3. customer orders (view, edit, add, delete, fulfilled)
+
+4.warehouse employee
+                1. view warehouse inventory
+                2. view store inventory
+                3. inventory orders (view, edit, add, delete, shipped)
+                4. customer orders (view, edit, add, delete, shipped)
+                5. Product (view, edit, add, delete)
+
+I was also thinking through what the “Inventory Orders” feature would look like.
+Let me  know what you think of the below:
+
+Inventory Orders Screen
+	Add new Inventory order button (Goes to empty Edit Inventory Order Screen)
+	Displays a list of all outstand inventory orders on each item in the list:
+		Date of Order
+		Edit button
+		Delete button
+		Approve button (manager only)
+		Fulfilled button
+		Shipped button (warehouse only)
+
+ 
+
+Edit Inventory Order Screen
+	Add new production order button (Displays a list of all products to choose from, when one is selected it is added to the list)
+	Displays a list of all outstand inventory orders on each item in the list:
+		Name of product
+		Count ordered
+                Button to Increase Count
+                Button to Decrease Count
+		Delete button
+		Approve button (manager only)
+		Fulfilled button
+		Shipped button (warehouse only)
