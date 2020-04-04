@@ -26,11 +26,12 @@ Partial Class MainMenuForm
         Me.orderFormBtn = New System.Windows.Forms.Button()
         Me.customerOrderBtn = New System.Windows.Forms.Button()
         Me.logoutBtn = New System.Windows.Forms.Button()
+        Me.adminBtn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'currentInventoryBtn
         '
-        Me.currentInventoryBtn.Location = New System.Drawing.Point(86, 12)
+        Me.currentInventoryBtn.Location = New System.Drawing.Point(105, 12)
         Me.currentInventoryBtn.Name = "currentInventoryBtn"
         Me.currentInventoryBtn.Size = New System.Drawing.Size(95, 39)
         Me.currentInventoryBtn.TabIndex = 0
@@ -39,7 +40,7 @@ Partial Class MainMenuForm
         '
         'orderFormBtn
         '
-        Me.orderFormBtn.Location = New System.Drawing.Point(86, 73)
+        Me.orderFormBtn.Location = New System.Drawing.Point(105, 73)
         Me.orderFormBtn.Name = "orderFormBtn"
         Me.orderFormBtn.Size = New System.Drawing.Size(95, 51)
         Me.orderFormBtn.TabIndex = 1
@@ -48,7 +49,7 @@ Partial Class MainMenuForm
         '
         'customerOrderBtn
         '
-        Me.customerOrderBtn.Location = New System.Drawing.Point(86, 145)
+        Me.customerOrderBtn.Location = New System.Drawing.Point(105, 145)
         Me.customerOrderBtn.Name = "customerOrderBtn"
         Me.customerOrderBtn.Size = New System.Drawing.Size(95, 39)
         Me.customerOrderBtn.TabIndex = 2
@@ -57,23 +58,33 @@ Partial Class MainMenuForm
         '
         'logoutBtn
         '
-        Me.logoutBtn.Location = New System.Drawing.Point(86, 203)
+        Me.logoutBtn.Location = New System.Drawing.Point(105, 203)
         Me.logoutBtn.Name = "logoutBtn"
         Me.logoutBtn.Size = New System.Drawing.Size(95, 23)
         Me.logoutBtn.TabIndex = 3
         Me.logoutBtn.Text = "Logout"
         Me.logoutBtn.UseVisualStyleBackColor = True
         '
-        'MainMenu
+        'adminBtn
+        '
+        Me.adminBtn.Location = New System.Drawing.Point(12, 12)
+        Me.adminBtn.Name = "adminBtn"
+        Me.adminBtn.Size = New System.Drawing.Size(67, 39)
+        Me.adminBtn.TabIndex = 4
+        Me.adminBtn.Text = "Admin Control"
+        Me.adminBtn.UseVisualStyleBackColor = True
+        '
+        'MainMenuForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(302, 238)
+        Me.Controls.Add(Me.adminBtn)
         Me.Controls.Add(Me.logoutBtn)
         Me.Controls.Add(Me.customerOrderBtn)
         Me.Controls.Add(Me.orderFormBtn)
         Me.Controls.Add(Me.currentInventoryBtn)
-        Me.Name = "MainMenu"
+        Me.Name = "MainMenuForm"
         Me.Text = "Main Menu"
         Me.ResumeLayout(False)
 
@@ -83,4 +94,5 @@ Partial Class MainMenuForm
     Friend WithEvents orderFormBtn As Button
     Friend WithEvents customerOrderBtn As Button
     Friend WithEvents logoutBtn As Button
+    Friend WithEvents adminBtn As Button
 End Class

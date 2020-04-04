@@ -87,6 +87,12 @@
     <Compile Include="CustomerOrderForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AdminForm.Designer.vb">
+      <DependentUpon>AdminForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AdminForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LoginForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -122,10 +128,14 @@
     <Compile Include="OrderForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="User.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CurrentInventoryForm.resx">
       <DependentUpon>CurrentInventoryForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForm.resx">
+      <DependentUpon>AdminForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>

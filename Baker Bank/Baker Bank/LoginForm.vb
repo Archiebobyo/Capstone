@@ -36,14 +36,43 @@ Public Class LoginForm
             End While
 
             If count = 1 Then
-                MessageBox.Show("UserName And Password are correct")
+                'MessageBox.Show("UserName And Password are correct")
+
+                User.EmployeeID = READER(0)
+                If Not IsDBNull(READER(1)) Then
+                    User.StoreID = READER(1)
+                End If
+                If Not IsDBNull(READER(2)) Then
+                    User.WarehouseID = READER(2)
+                End If
+
+                User.Name = READER(3)
+                User.EmployeeType = READER(4)
+                User.Phone = READER(5)
+                User.Email = READER(6)
+
+                If Not IsDBNull(READER(7)) Then
+                    User.Address = READER(7)
+                End If
+
+                User.ManagerID = READER(8)
+
+                If Not IsDBNull(READER(9)) Then
+                    User.Password = READER(9)
+                Else
+                    MessageBox.Show("Request your Manager to give you a Password.")
+                    Me.Close()
+                End If
+                User.Password = READER(9)
+
+                'MessageBox.Show(User.Email)
                 Dim MainMenu As New MainMenuForm
                 MainMenu.Show()
                 Me.Close()
             ElseIf count > 1 Then
-                MessageBox.Show("UserName And Password are Duplicate")
-            Else
-                MessageBox.Show("UserName And Password are not correct")
+                    MessageBox.Show("UserName And Password are Duplicate")
+                Else
+                    MessageBox.Show("UserName And Password are not correct")
             End If
 
 

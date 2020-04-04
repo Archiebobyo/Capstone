@@ -19,4 +19,18 @@
         Form.Show()
         Me.Close()
     End Sub
+
+    Private Sub adminBtn_Click(sender As Object, e As EventArgs) Handles adminBtn.Click
+        Dim Form As New AdminForm
+        Form.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub MainMenuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If User.EmployeeType = 0 Then
+            adminBtn.Enabled = True
+        Else
+            adminBtn.Enabled = False
+        End If
+    End Sub
 End Class
