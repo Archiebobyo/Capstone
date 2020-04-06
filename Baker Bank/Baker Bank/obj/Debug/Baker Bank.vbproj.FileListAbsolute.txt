@@ -58,3 +58,24 @@ C:\Users\jarl\Documents\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.exe
 C:\Users\jarl\Documents\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.xml
 C:\Users\jarl\Documents\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.pdb
 C:\Users\jarl\Documents\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.AdminForm.resources
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.exe.config
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.exe
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.pdb
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Baker Bank.xml
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Google.Protobuf.dll
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\Renci.SshNet.dll
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\bin\Debug\MySql.Data.xml
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbprojAssemblyReference.cache
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.currentInventoryForm.resources
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.AdminForm.resources
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.LoginForm.resources
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.MainMenuForm.resources
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker_Bank.Resources.resources
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbproj.GenerateResource.cache
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbproj.CoreCompileInputs.cache
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.vbproj.CopyComplete
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.exe
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.xml
+C:\Users\Josh\Source\Repos\Capstone\Baker Bank\Baker Bank\obj\Debug\Baker Bank.pdb

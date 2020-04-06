@@ -22,118 +22,150 @@ Partial Class currentInventoryForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btn_LoadData = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.btn_Insert = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.tb_StoreID = New System.Windows.Forms.TextBox()
+        Me.tb_StoreName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.tb_StoreAddress = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox1.SuspendLayout()
+        Me.lb_EmployeeRep = New System.Windows.Forms.ListBox()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Button1
+        'btn_LoadData
         '
-        Me.Button1.Location = New System.Drawing.Point(407, 387)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(118, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Connect to DB"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btn_LoadData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_LoadData.Location = New System.Drawing.Point(553, 352)
+        Me.btn_LoadData.Name = "btn_LoadData"
+        Me.btn_LoadData.Size = New System.Drawing.Size(157, 41)
+        Me.btn_LoadData.TabIndex = 0
+        Me.btn_LoadData.Text = "Load Data"
+        Me.btn_LoadData.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(297, 12)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(642, 334)
+        Me.DataGridView1.TabIndex = 1
+        '
+        'btn_Insert
+        '
+        Me.btn_Insert.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Insert.Location = New System.Drawing.Point(58, 255)
+        Me.btn_Insert.Name = "btn_Insert"
+        Me.btn_Insert.Size = New System.Drawing.Size(157, 41)
+        Me.btn_Insert.TabIndex = 2
+        Me.btn_Insert.Text = "Insert"
+        Me.btn_Insert.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(169, 64)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 37)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(13, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "_"
+        Me.Label1.Size = New System.Drawing.Size(82, 20)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Store ID:"
+        '
+        'tb_StoreID
+        '
+        Me.tb_StoreID.Location = New System.Drawing.Point(136, 39)
+        Me.tb_StoreID.Name = "tb_StoreID"
+        Me.tb_StoreID.Size = New System.Drawing.Size(35, 20)
+        Me.tb_StoreID.TabIndex = 4
+        '
+        'tb_StoreName
+        '
+        Me.tb_StoreName.Location = New System.Drawing.Point(136, 72)
+        Me.tb_StoreName.Name = "tb_StoreName"
+        Me.tb_StoreName.Size = New System.Drawing.Size(139, 20)
+        Me.tb_StoreName.TabIndex = 6
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(207, 64)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 72)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(13, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "_"
+        Me.Label2.Size = New System.Drawing.Size(109, 20)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Store Name:"
+        '
+        'tb_StoreAddress
+        '
+        Me.tb_StoreAddress.Location = New System.Drawing.Point(136, 110)
+        Me.tb_StoreAddress.Name = "tb_StoreAddress"
+        Me.tb_StoreAddress.Size = New System.Drawing.Size(155, 20)
+        Me.tb_StoreAddress.TabIndex = 8
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(228, 119)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(12, 110)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(13, 13)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "_"
+        Me.Label3.Size = New System.Drawing.Size(80, 20)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "Address:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(274, 119)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(12, 152)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(13, 13)
-        Me.Label4.TabIndex = 4
-        Me.Label4.Text = "_"
+        Me.Label4.Size = New System.Drawing.Size(135, 20)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Employee Rep.:"
         '
-        'Label5
+        'lb_EmployeeRep
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 51)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(141, 37)
-        Me.Label5.TabIndex = 5
-        Me.Label5.Text = "Store ID"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 101)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(198, 37)
-        Me.Label6.TabIndex = 6
-        Me.Label6.Text = "Store Name"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Location = New System.Drawing.Point(200, 71)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(422, 265)
-        Me.GroupBox1.TabIndex = 7
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
+        Me.lb_EmployeeRep.FormattingEnabled = True
+        Me.lb_EmployeeRep.Location = New System.Drawing.Point(153, 152)
+        Me.lb_EmployeeRep.Name = "lb_EmployeeRep"
+        Me.lb_EmployeeRep.Size = New System.Drawing.Size(120, 69)
+        Me.lb_EmployeeRep.TabIndex = 10
         '
         'currentInventoryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(947, 410)
+        Me.Controls.Add(Me.lb_EmployeeRep)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.tb_StoreAddress)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.tb_StoreName)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.tb_StoreID)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.btn_Insert)
+        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.btn_LoadData)
         Me.Name = "currentInventoryForm"
         Me.Text = "currentInventoryForm"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btn_LoadData As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents btn_Insert As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents tb_StoreID As TextBox
+    Friend WithEvents tb_StoreName As TextBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents tb_StoreAddress As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents lb_EmployeeRep As ListBox
 End Class
