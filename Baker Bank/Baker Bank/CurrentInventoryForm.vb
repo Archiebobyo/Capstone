@@ -3,6 +3,7 @@
 Public Class currentInventoryForm
     Dim MysqlConn As MySqlConnection
     Dim COMMAND As MySqlCommand
+    Dim StoreID As Integer
 
 
     Private Sub currentInventoryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,7 +48,7 @@ Public Class currentInventoryForm
         Try
             MysqlConn.Open()
             Dim Query As String
-            Query = "select * from mydb.Store"
+            Query = "SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Employee.Name EmployeeName, Store.ContactPhone EmployeePhone, Store.ContactEmail EmployeeEmail FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID;"
             COMMAND = New MySqlCommand(Query, MysqlConn)
             SDA.SelectCommand = COMMAND
             SDA.Fill(dbDataSet)
@@ -107,6 +108,7 @@ Public Class currentInventoryForm
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
         Dim READER As MySqlDataReader
+        Dim StoreID As Integer
         Dim EmployeeID As Integer
         Dim EmployeeEmail As String
         Dim EmployeePhone As Integer
@@ -114,11 +116,24 @@ Public Class currentInventoryForm
         Try
             MysqlConn.Open()
             Dim Query As String
+            Query = "select MAX(Store.storeid) from mydb.Store"
+            COMMAND = New MySqlCommand(Query, MysqlConn)
+            StoreID = COMMAND.ExecuteScalar
+            StoreID += 1
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+
+        Try
+            MysqlConn.Open()
+            Dim Query As String
             Query = "select Employee.EmployeeID from mydb.Employee where Employee.Name = '" & lb_EmployeeRep.SelectedItem & "'"
             COMMAND = New MySqlCommand(Query, MysqlConn)
             EmployeeID = COMMAND.ExecuteScalar
-
-            MessageBox.Show(EmployeeID)
 
             MysqlConn.Close()
         Catch ex As Exception
@@ -152,7 +167,7 @@ Public Class currentInventoryForm
         Try
             MysqlConn.Open()
             Dim query As String
-            query = "insert into mydb.Store (storeid, name, address, contactphone, contactemail, contactemployeeid) values ('" & tb_StoreID.Text & "', '" & tb_StoreName.Text & "', '" & tb_StoreAddress.Text & "', '" & EmployeePhone & "', '" & EmployeeEmail & "', '" & EmployeeID & "')"
+            query = "insert into mydb.Store (storeid, name, address, contactphone, contactemail, contactemployeeid) values ('" & StoreID & "', '" & tb_StoreName.Text & "', '" & tb_StoreAddress.Text & "', '" & EmployeePhone & "', '" & EmployeeEmail & "', '" & EmployeeID & "')"
             COMMAND = New MySqlCommand(query, MysqlConn)
             READER = COMMAND.ExecuteReader
             Dim count As Integer
@@ -164,5 +179,154 @@ Public Class currentInventoryForm
             MysqlConn.Dispose()
         End Try
 
+        load_table()
+
+    End Sub
+
+    Private Sub btn_Update_Click(sender As Object, e As EventArgs) Handles btn_Update.Click
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+        Dim EmployeeID As Integer
+        Dim EmployeeEmail As String
+        Dim EmployeePhone As Integer
+
+        Try
+            MysqlConn.Open()
+            Dim Query As String
+            Query = "select Employee.EmployeeID from mydb.Employee where Employee.Name = '" & lb_EmployeeRep.SelectedItem & "'"
+            COMMAND = New MySqlCommand(Query, MysqlConn)
+            EmployeeID = COMMAND.ExecuteScalar
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+            query = "select Employee.Phone, Employee.Email from mydb.Employee where Employee.EmployeeId = '" & EmployeeID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            While READER.Read()
+                EmployeePhone = READER(0)
+                EmployeeEmail = READER(1)
+            End While
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+            query = "update Store set Name = '" & tb_StoreName.Text & "', Address = '" & tb_StoreAddress.Text & "', ContactPhone = '" & EmployeePhone & "', ContactEmail = '" & EmployeeEmail & "', ContactEmployeeID = '" & EmployeeID & "' WHERE StoreID = '" & StoreID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+        load_table()
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        StoreID = DataGridView1.CurrentCell.RowIndex
+
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+            query = "SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Employee.Name EmployeeName FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID WHERE Store.StoreID = '" & StoreID & "';"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            While READER.Read()
+                tb_StoreID.Text = READER(0)
+                tb_StoreName.Text = READER(1)
+                tb_StoreAddress.Text = READER(2)
+                lb_EmployeeRep.SelectedItem = READER(3)
+            End While
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+        Dim EmployeeID As Integer
+        Dim EmployeeEmail As String
+        Dim EmployeePhone As Integer
+
+        Try
+            MysqlConn.Open()
+            Dim Query As String
+            Query = "select Employee.EmployeeID from mydb.Employee where Employee.Name = '" & lb_EmployeeRep.SelectedItem & "'"
+            COMMAND = New MySqlCommand(Query, MysqlConn)
+            EmployeeID = COMMAND.ExecuteScalar
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+            query = "select Employee.Phone, Employee.Email from mydb.Employee where Employee.EmployeeId = '" & EmployeeID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            While READER.Read()
+                EmployeePhone = READER(0)
+                EmployeeEmail = READER(1)
+            End While
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+            query = "delete from Store where StoreID = '" & StoreID & "';"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+
+        load_table()
     End Sub
 End Class

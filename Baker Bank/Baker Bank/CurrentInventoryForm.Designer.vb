@@ -33,31 +33,35 @@ Partial Class currentInventoryForm
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lb_EmployeeRep = New System.Windows.Forms.ListBox()
+        Me.btn_Update = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btn_LoadData
         '
         Me.btn_LoadData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_LoadData.Location = New System.Drawing.Point(553, 352)
+        Me.btn_LoadData.Location = New System.Drawing.Point(714, 399)
         Me.btn_LoadData.Name = "btn_LoadData"
         Me.btn_LoadData.Size = New System.Drawing.Size(157, 41)
         Me.btn_LoadData.TabIndex = 0
-        Me.btn_LoadData.Text = "Load Data"
+        Me.btn_LoadData.Text = "Refresh"
         Me.btn_LoadData.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(297, 12)
+        Me.DataGridView1.ColumnHeadersHeight = 30
+        Me.DataGridView1.EnableHeadersVisualStyles = False
+        Me.DataGridView1.Location = New System.Drawing.Point(353, 12)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(642, 334)
+        Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
+        Me.DataGridView1.Size = New System.Drawing.Size(791, 381)
         Me.DataGridView1.TabIndex = 1
         '
         'btn_Insert
         '
         Me.btn_Insert.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Insert.Location = New System.Drawing.Point(58, 255)
+        Me.btn_Insert.Location = New System.Drawing.Point(12, 266)
         Me.btn_Insert.Name = "btn_Insert"
         Me.btn_Insert.Size = New System.Drawing.Size(157, 41)
         Me.btn_Insert.TabIndex = 2
@@ -76,16 +80,17 @@ Partial Class currentInventoryForm
         '
         'tb_StoreID
         '
+        Me.tb_StoreID.Enabled = False
         Me.tb_StoreID.Location = New System.Drawing.Point(136, 39)
         Me.tb_StoreID.Name = "tb_StoreID"
-        Me.tb_StoreID.Size = New System.Drawing.Size(35, 20)
+        Me.tb_StoreID.Size = New System.Drawing.Size(47, 20)
         Me.tb_StoreID.TabIndex = 4
         '
         'tb_StoreName
         '
         Me.tb_StoreName.Location = New System.Drawing.Point(136, 72)
         Me.tb_StoreName.Name = "tb_StoreName"
-        Me.tb_StoreName.Size = New System.Drawing.Size(139, 20)
+        Me.tb_StoreName.Size = New System.Drawing.Size(193, 20)
         Me.tb_StoreName.TabIndex = 6
         '
         'Label2
@@ -102,7 +107,7 @@ Partial Class currentInventoryForm
         '
         Me.tb_StoreAddress.Location = New System.Drawing.Point(136, 110)
         Me.tb_StoreAddress.Name = "tb_StoreAddress"
-        Me.tb_StoreAddress.Size = New System.Drawing.Size(155, 20)
+        Me.tb_StoreAddress.Size = New System.Drawing.Size(193, 20)
         Me.tb_StoreAddress.TabIndex = 8
         '
         'Label3
@@ -130,14 +135,36 @@ Partial Class currentInventoryForm
         Me.lb_EmployeeRep.FormattingEnabled = True
         Me.lb_EmployeeRep.Location = New System.Drawing.Point(153, 152)
         Me.lb_EmployeeRep.Name = "lb_EmployeeRep"
-        Me.lb_EmployeeRep.Size = New System.Drawing.Size(120, 69)
+        Me.lb_EmployeeRep.Size = New System.Drawing.Size(153, 95)
         Me.lb_EmployeeRep.TabIndex = 10
+        '
+        'btn_Update
+        '
+        Me.btn_Update.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Update.Location = New System.Drawing.Point(190, 266)
+        Me.btn_Update.Name = "btn_Update"
+        Me.btn_Update.Size = New System.Drawing.Size(157, 41)
+        Me.btn_Update.TabIndex = 11
+        Me.btn_Update.Text = "Update"
+        Me.btn_Update.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(190, 313)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(157, 41)
+        Me.Button1.TabIndex = 12
+        Me.Button1.Text = "Delete"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'currentInventoryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(947, 410)
+        Me.ClientSize = New System.Drawing.Size(1165, 519)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btn_Update)
         Me.Controls.Add(Me.lb_EmployeeRep)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.tb_StoreAddress)
@@ -168,4 +195,6 @@ Partial Class currentInventoryForm
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents lb_EmployeeRep As ListBox
+    Friend WithEvents btn_Update As Button
+    Friend WithEvents Button1 As Button
 End Class
