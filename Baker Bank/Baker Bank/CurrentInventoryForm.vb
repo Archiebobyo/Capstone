@@ -64,6 +64,32 @@ Public Class currentInventoryForm
         End Try
     End Sub
 
+    Private Sub load_inventory()
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim SDA As New MySqlDataAdapter
+        Dim dbDataSet As New DataTable
+        Dim bSource As New BindingSource
+
+        Try
+            MysqlConn.Open()
+            Dim Query As String
+            Query = "SELECT Store.StoreID StoreID, Store.Name StoreName, Products.Name Product, StoreProduct.CountOnHand Quantity FROM Store INNER JOIN StoreProduct On StoreProduct.StoreID = Store.StoreID INNER JOIN Products ON Products.ProductID = StoreProduct.ProductID WHERE Store.StoreID = '" & StoreID & "';"
+            COMMAND = New MySqlCommand(Query, MysqlConn)
+            SDA.SelectCommand = COMMAND
+            SDA.Fill(dbDataSet)
+            bSource.DataSource = dbDataSet
+            dgv_Inventory.DataSource = bSource
+            SDA.Update(dbDataSet)
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+    End Sub
+
     Private Sub FillListBox()
         Dim stringCmd As String
         Dim myCmd As MySqlCommand
@@ -269,6 +295,9 @@ Public Class currentInventoryForm
         Finally
             MysqlConn.Dispose()
         End Try
+
+        load_inventory()
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -329,4 +358,6 @@ Public Class currentInventoryForm
 
         load_table()
     End Sub
+
+
 End Class

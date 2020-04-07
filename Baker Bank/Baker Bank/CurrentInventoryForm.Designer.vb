@@ -35,13 +35,15 @@ Partial Class currentInventoryForm
         Me.lb_EmployeeRep = New System.Windows.Forms.ListBox()
         Me.btn_Update = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.dgv_Inventory = New System.Windows.Forms.DataGridView()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_Inventory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btn_LoadData
         '
         Me.btn_LoadData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_LoadData.Location = New System.Drawing.Point(714, 399)
+        Me.btn_LoadData.Location = New System.Drawing.Point(739, 434)
         Me.btn_LoadData.Name = "btn_LoadData"
         Me.btn_LoadData.Size = New System.Drawing.Size(157, 41)
         Me.btn_LoadData.TabIndex = 0
@@ -55,7 +57,7 @@ Partial Class currentInventoryForm
         Me.DataGridView1.Location = New System.Drawing.Point(353, 12)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
-        Me.DataGridView1.Size = New System.Drawing.Size(791, 381)
+        Me.DataGridView1.Size = New System.Drawing.Size(887, 416)
         Me.DataGridView1.TabIndex = 1
         '
         'btn_Insert
@@ -158,11 +160,20 @@ Partial Class currentInventoryForm
         Me.Button1.Text = "Delete"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'dgv_Inventory
+        '
+        Me.dgv_Inventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv_Inventory.Location = New System.Drawing.Point(12, 474)
+        Me.dgv_Inventory.Name = "dgv_Inventory"
+        Me.dgv_Inventory.Size = New System.Drawing.Size(465, 150)
+        Me.dgv_Inventory.TabIndex = 13
+        '
         'currentInventoryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1165, 519)
+        Me.ClientSize = New System.Drawing.Size(1279, 661)
+        Me.Controls.Add(Me.dgv_Inventory)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_Update)
         Me.Controls.Add(Me.lb_EmployeeRep)
@@ -179,6 +190,7 @@ Partial Class currentInventoryForm
         Me.Name = "currentInventoryForm"
         Me.Text = "currentInventoryForm"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_Inventory, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -197,4 +209,5 @@ Partial Class currentInventoryForm
     Friend WithEvents lb_EmployeeRep As ListBox
     Friend WithEvents btn_Update As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents dgv_Inventory As DataGridView
 End Class
