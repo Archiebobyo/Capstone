@@ -456,6 +456,7 @@ Public Class currentInventoryForm
             End Try
 
             load_table("SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Employee.Name EmployeeName, Store.ContactPhone EmployeePhone, Store.ContactEmail EmployeeEmail FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID;")
+            load_inventory()
         ElseIf (SelectedItem = "InventoryOrderProduct") Then
             Try
                 MysqlConn.Open()
@@ -672,6 +673,7 @@ Public Class currentInventoryForm
                 READER = COMMAND.ExecuteReader
 
                 While READER.Read()
+                    StoreID = READER(0)
                     input1.Text = READER(0)
                     input2.Text = READER(1)
                     input3.Text = READER(2)
@@ -749,7 +751,6 @@ Public Class currentInventoryForm
         End If
 
 
-        load_inventory()
 
     End Sub
 
