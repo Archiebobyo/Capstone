@@ -53,6 +53,7 @@ Partial Class currentInventoryForm
         Me.input9 = New System.Windows.Forms.TextBox()
         Me.input10 = New System.Windows.Forms.TextBox()
         Me.field10 = New System.Windows.Forms.Label()
+        Me.PlaceOrderBtn = New System.Windows.Forms.Button()
         CType(Me.dgv_Stores, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgv_Inventory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -72,14 +73,14 @@ Partial Class currentInventoryForm
         '
         Me.dgv_Stores.AllowUserToAddRows = False
         Me.dgv_Stores.AllowUserToDeleteRows = False
-        Me.dgv_Stores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgv_Stores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv_Stores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv_Stores.ColumnHeadersHeight = 30
         Me.dgv_Stores.EnableHeadersVisualStyles = False
         Me.dgv_Stores.Location = New System.Drawing.Point(12, 464)
         Me.dgv_Stores.Name = "dgv_Stores"
         Me.dgv_Stores.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
-        Me.dgv_Stores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.dgv_Stores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_Stores.Size = New System.Drawing.Size(600, 185)
         Me.dgv_Stores.TabIndex = 14
         '
@@ -346,12 +347,23 @@ Partial Class currentInventoryForm
         Me.field10.Size = New System.Drawing.Size(0, 20)
         Me.field10.TabIndex = 25
         '
+        'PlaceOrderBtn
+        '
+        Me.PlaceOrderBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlaceOrderBtn.Location = New System.Drawing.Point(433, 370)
+        Me.PlaceOrderBtn.Name = "PlaceOrderBtn"
+        Me.PlaceOrderBtn.Size = New System.Drawing.Size(182, 41)
+        Me.PlaceOrderBtn.TabIndex = 27
+        Me.PlaceOrderBtn.Text = "Place Order"
+        Me.PlaceOrderBtn.UseVisualStyleBackColor = True
+        '
         'currentInventoryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1279, 661)
+        Me.Controls.Add(Me.PlaceOrderBtn)
         Me.Controls.Add(Me.input10)
         Me.Controls.Add(Me.field10)
         Me.Controls.Add(Me.input9)
@@ -423,4 +435,5 @@ Partial Class currentInventoryForm
     Friend WithEvents input9 As TextBox
     Friend WithEvents input10 As TextBox
     Friend WithEvents field10 As Label
+    Friend WithEvents PlaceOrderBtn As Button
 End Class

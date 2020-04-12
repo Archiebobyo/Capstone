@@ -8,287 +8,9 @@ Public Class currentInventoryForm
     Dim UpdatedInventoryQuant(0) As Integer
     Dim IDRow As Integer
 
-    Private Sub cmb_Table_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_Table.SelectedIndexChanged
-        Dim SelectedItem As String
-        SelectedItem = cmb_Table.SelectedItem
-
-        input1.Text = ""
-        input2.Text = ""
-        input3.Text = ""
-        input4.Text = ""
-        input5.Text = ""
-        input6.Text = ""
-        input7.Text = ""
-        input8.Text = ""
-
-        If (SelectedItem = "Employee") Then
-            load_table("select * from Employee")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            field1.Text = "Employee ID"
-            field2.Text = "Name"
-            field3.Text = "EmployeeType"
-            field4.Text = "Phone"
-            field4.Visible = True
-            input4.Visible = True
-            field5.Visible = True
-            input5.Visible = True
-            field5.Text = "Email"
-            field6.Visible = True
-            input6.Visible = True
-            field6.Text = "Password"
-            input6.UseSystemPasswordChar = True
-            input7.Visible = True
-            field7.Visible = True
-            input8.Visible = True
-            field8.Visible = True
-            field9.Visible = True
-            field10.Visible = True
-            input9.Visible = True
-            input10.Visible = True
-            field7.Text = "Address"
-            field8.Text = "City"
-            field9.Text = "State"
-            field10.Text = "Zipcode"
-            field3.Visible = True
-            input3.Visible = True
-
-
-
-        ElseIf (SelectedItem = "InventoryOrder") Then
-            load_table("select * from InventoryOrder")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            field1.Text = "Inventory Order ID"
-            field2.Text = "EmployeeID"
-            field3.Text = "StoreID"
-            field4.Text = "WarehouseID"
-            field5.Text = "DateOfOrder"
-            field6.Text = "Manager Approval"
-            field4.Visible = True
-            input4.Visible = True
-            field5.Visible = True
-            input5.Visible = True
-            field4.Visible = True
-            field5.Visible = True
-            field6.Visible = True
-            input6.Visible = True
-            input6.UseSystemPasswordChar = False
-            input7.Visible = False
-            field7.Visible = False
-            input8.Visible = False
-            field8.Visible = False
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-            field3.Visible = True
-            input3.Visible = True
-
-
-
-
-        ElseIf (SelectedItem = "InventoryOrderProduct") Then
-            load_table("select * from InventoryOrderProduct")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            field1.Text = "Inventory Order Product ID"
-            field2.Text = "Inventory Order ID"
-            field3.Text = "Product ID"
-            field4.Text = "Order Quantity"
-            input1.Location = New Point(336, 39)
-            input4.Visible = True
-            field4.Visible = True
-            input6.Visible = False
-            field6.Visible = False
-            field5.Visible = False
-            input5.Visible = False
-            input7.Visible = False
-            field7.Visible = False
-            input8.Visible = False
-            field8.Visible = False
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-            field3.Visible = True
-            input3.Visible = True
-
-
-
-        ElseIf (SelectedItem = "Products") Then
-            load_table("SELECT * from Products")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            input4.Visible = False
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = False
-            input8.Visible = False
-            field4.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = False
-            field8.Visible = False
-            field1.Text = "Product ID"
-            field2.Text = "Name"
-            field3.Text = "Price"
-            field3.Visible = True
-            input3.Visible = True
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-
-
-        ElseIf (SelectedItem = "StoreProduct") Then
-            load_table("SELECT * from StoreProduct")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = False
-            input8.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = False
-            field8.Visible = False
-            field1.Text = "Store Product ID"
-            field2.Text = "Store ID"
-            field3.Text = "Product ID"
-            field3.Visible = True
-            input3.Visible = True
-            field4.Visible = True
-            input4.Visible = True
-            field4.Text = "Count On Hand"
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-
-
-
-
-        ElseIf (SelectedItem = "Store") Then
-            load_table("SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Employee.Name EmployeeName, Store.ContactPhone EmployeePhone, Store.ContactEmail EmployeeEmail FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID;")
-            Panel1.Visible = True
-            dgv_Inventory.Visible = True
-            dgv_Stores.Location = New Point(12, 464)
-            lb_EmployeeRep.Visible = True
-            field_cmb.Visible = True
-            field_cmb.Text = "Employee Rep."
-            field1.Text = "Store ID"
-            field2.Text = "Store Name"
-            field3.Text = "Store Address"
-            field3.Visible = False
-            input3.Visible = False
-            field4.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = True
-            field8.Visible = True
-            input4.Visible = False
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = True
-            input8.Visible = True
-            field9.Visible = True
-            field10.Visible = True
-            input9.Visible = True
-            input10.Visible = True
-            field7.Text = "Address"
-            field8.Text = "City"
-            field9.Text = "State"
-            field10.Text = "Zipcode"
-
-
-
-        ElseIf (SelectedItem = "Warehouse") Then
-            load_table("select * from Warehouse")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            field_cmb.Visible = True
-            lb_EmployeeRep.Visible = True
-            field3.Visible = False
-            input3.Visible = False
-            field4.Visible = False
-            input4.Visible = False
-            field5.Visible = False
-            input5.Visible = False
-            field4.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            input6.Visible = False
-            field7.Visible = True
-            field8.Visible = True
-            input7.Visible = False
-            input8.Visible = False
-            input6.UseSystemPasswordChar = False
-            field1.Text = "Warehouse ID"
-            field2.Text = "Name"
-            input7.Visible = True
-            input8.Visible = True
-            field9.Visible = True
-            field10.Visible = True
-            input9.Visible = True
-            input10.Visible = True
-            field7.Text = "Address"
-            field8.Text = "City"
-            field9.Text = "State"
-            field10.Text = "Zipcode"
-
-
-
-        ElseIf (SelectedItem = "WarehouseProduct") Then
-            load_table("SELECT * from WarehouseProduct")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            input4.Visible = true
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = False
-            input8.Visible = False
-            field4.Visible = True
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = False
-            field8.Visible = False
-            field1.Text = "Warehouse Product ID"
-            field2.Text = "Warehouse ID"
-            field3.Text = "Product ID"
-            field3.Visible = True
-            input3.Visible = True
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-            field4.Text = "Count On Hand"
-
-
-
-        End If
-    End Sub
-
     Private Sub currentInventoryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         If (User.EmployeeType = 0) Then
             ' Everything is fair game
             Me.Text = "Store Manager -- Admin View"
@@ -316,8 +38,12 @@ Public Class currentInventoryForm
         FillListBox()
         load_table("SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Store.City, Store.State, Store.Zip, Employee.Name EmployeeName, Store.ContactPhone EmployeePhone, Store.ContactEmail EmployeeEmail FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID;")
 
-    End Sub
+        load_inventory()
 
+    End Sub
+    Private Sub cmb_Table_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_Table.SelectedIndexChanged
+        loadData()
+    End Sub
     Private Sub load_table(ByVal query As String)
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
@@ -400,7 +126,7 @@ Public Class currentInventoryForm
                 .Name = "tb" + (j.ToString)
             }
             Panel1.Controls.Add(tb_Changes)
-            AddHandler tb_Changes.ValueChanged, AddressOf numericUpDown_valueChanged
+            'AddHandler tb_Changes.ValueChanged, AddressOf numericUpDown_valueChanged
         Next
 
 
@@ -444,275 +170,7 @@ Public Class currentInventoryForm
     End Sub
 
     Private Sub btn_LoadData_Click(sender As Object, e As EventArgs) Handles btn_LoadData.Click
-        Dim SelectedItem As String
-        SelectedItem = cmb_Table.SelectedItem
-
-        input1.Text = ""
-        input2.Text = ""
-        input3.Text = ""
-        input4.Text = ""
-        input5.Text = ""
-        input6.Text = ""
-        input7.Text = ""
-        input8.Text = ""
-
-        If (SelectedItem = "Employee") Then
-            load_table("select * from Employee")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            field1.Text = "Employee ID"
-            field2.Text = "Name"
-            field3.Text = "EmployeeType"
-            field4.Text = "Phone"
-            field4.Visible = True
-            input4.Visible = True
-            field5.Visible = True
-            input5.Visible = True
-            field5.Text = "Email"
-            field6.Visible = True
-            input6.Visible = True
-            field6.Text = "Password"
-            input6.UseSystemPasswordChar = True
-            input7.Visible = True
-            field7.Visible = True
-            input8.Visible = True
-            field8.Visible = True
-            field9.Visible = True
-            field10.Visible = True
-            input9.Visible = True
-            input10.Visible = True
-            field7.Text = "Address"
-            field8.Text = "City"
-            field9.Text = "State"
-            field10.Text = "Zipcode"
-
-
-
-        ElseIf (SelectedItem = "InventoryOrder") Then
-            load_table("select * from InventoryOrder")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            field1.Text = "Inventory Order ID"
-            field2.Text = "EmployeeID"
-            field3.Text = "StoreID"
-            field4.Text = "WarehouseID"
-            field5.Text = "DateOfOrder"
-            field6.Text = "Manager Approval"
-            field4.Visible = True
-            input4.Visible = True
-            field5.Visible = True
-            input5.Visible = True
-            field4.Visible = True
-            field5.Visible = True
-            field6.Visible = True
-            input6.Visible = True
-            input6.UseSystemPasswordChar = False
-            input7.Visible = False
-            field7.Visible = False
-            input8.Visible = False
-            field8.Visible = False
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-
-
-
-
-        ElseIf (SelectedItem = "InventoryOrderProduct") Then
-            load_table("select * from InventoryOrderProduct")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            field1.Text = "Inventory Order Product ID"
-            field2.Text = "Inventory Order ID"
-            field3.Text = "Product ID"
-            field4.Text = "Order Quantity"
-            input1.Location = New Point(336, 39)
-            input4.Visible = True
-            field4.Visible = True
-            input6.Visible = False
-            field6.Visible = False
-            field5.Visible = False
-            input5.Visible = False
-            input7.Visible = False
-            field7.Visible = False
-            input8.Visible = False
-            field8.Visible = False
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-
-
-
-        ElseIf (SelectedItem = "Products") Then
-            load_table("SELECT * from Products")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            input4.Visible = False
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = False
-            input8.Visible = False
-            field4.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = False
-            field8.Visible = False
-            field1.Text = "Product ID"
-            field2.Text = "Name"
-            field3.Text = "Price"
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-
-
-        ElseIf (SelectedItem = "StoreProduct") Then
-            load_table("SELECT * from StoreProduct")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = False
-            input8.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = False
-            field8.Visible = False
-            field1.Text = "Store Product ID"
-            field2.Text = "Store ID"
-            field3.Text = "Product ID"
-            field3.Visible = True
-            input3.Visible = True
-            field4.Visible = True
-            input4.Visible = True
-            field4.Text = "Count On Hand"
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-
-
-
-
-        ElseIf (SelectedItem = "Store") Then
-            load_table("SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Employee.Name EmployeeName, Store.ContactPhone EmployeePhone, Store.ContactEmail EmployeeEmail FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID;")
-            Panel1.Visible = True
-            dgv_Inventory.Visible = True
-            dgv_Stores.Location = New Point(12, 464)
-            lb_EmployeeRep.Visible = True
-            field_cmb.Visible = True
-            field_cmb.Text = "Employee Rep."
-            field1.Text = "Store ID"
-            field2.Text = "Store Name"
-            field3.Text = "Store Address"
-            field3.Visible = False
-            input3.Visible = False
-            field4.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = True
-            field8.Visible = True
-            input4.Visible = False
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = True
-            input8.Visible = True
-            field9.Visible = True
-            field10.Visible = True
-            input9.Visible = True
-            input10.Visible = True
-            field7.Text = "Address"
-            field8.Text = "City"
-            field9.Text = "State"
-            field10.Text = "Zipcode"
-
-
-
-        ElseIf (SelectedItem = "Warehouse") Then
-            load_table("select * from Warehouse")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            field_cmb.Visible = True
-            lb_EmployeeRep.Visible = True
-            field3.Visible = False
-            input3.Visible = False
-            field4.Visible = False
-            input4.Visible = False
-            field5.Visible = False
-            input5.Visible = False
-            field4.Visible = False
-            field5.Visible = False
-            field6.Visible = False
-            input6.Visible = False
-            field7.Visible = True
-            field8.Visible = True
-            input7.Visible = False
-            input8.Visible = False
-            input6.UseSystemPasswordChar = False
-            field1.Text = "Warehouse ID"
-            field2.Text = "Name"
-            input7.Visible = True
-            input8.Visible = True
-            field9.Visible = True
-            field10.Visible = True
-            input9.Visible = True
-            input10.Visible = True
-            field7.Text = "Address"
-            field8.Text = "City"
-            field9.Text = "State"
-            field10.Text = "Zipcode"
-
-
-
-        ElseIf (SelectedItem = "WarehouseProduct") Then
-            load_table("SELECT * from WarehouseProduct")
-            Panel1.Visible = False
-            dgv_Inventory.Visible = False
-            dgv_Stores.Location = New Point(602, 22)
-            lb_EmployeeRep.Visible = False
-            field_cmb.Visible = False
-            input4.Visible = True
-            input5.Visible = False
-            input6.Visible = False
-            input7.Visible = False
-            input8.Visible = False
-            field4.Visible = True
-            field5.Visible = False
-            field6.Visible = False
-            field7.Visible = False
-            field8.Visible = False
-            field1.Text = "Warehouse Product ID"
-            field2.Text = "Warehouse ID"
-            field3.Text = "Product ID"
-            field3.Visible = True
-            input3.Visible = True
-            field9.Visible = False
-            field10.Visible = False
-            input9.Visible = False
-            input10.Visible = False
-            field4.Text = "Count On Hand"
-
-
-
-        End If
+        loadData()
     End Sub
     ' Copy and paste from other function when done
 
@@ -1871,10 +1329,288 @@ Public Class currentInventoryForm
         'MessageBox.Show("value changed")
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
-        ' Dim Form As New InventoryOrderForm
-        ' Form.Show()
+    Public Sub loadData()
+        Dim SelectedItem As String
+        SelectedItem = cmb_Table.SelectedItem
+
+        input1.Text = ""
+        input2.Text = ""
+        input3.Text = ""
+        input4.Text = ""
+        input5.Text = ""
+        input6.Text = ""
+        input7.Text = ""
+        input8.Text = ""
+
+        If (SelectedItem = "Employee") Then
+            load_table("select * from Employee")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            lb_EmployeeRep.Visible = False
+            field_cmb.Visible = False
+            field1.Text = "Employee ID"
+            field2.Text = "Name"
+            field3.Text = "EmployeeType"
+            field4.Text = "Phone"
+            field4.Visible = True
+            input4.Visible = True
+            field5.Visible = True
+            input5.Visible = True
+            field5.Text = "Email"
+            field6.Visible = True
+            input6.Visible = True
+            field6.Text = "Password"
+            input6.UseSystemPasswordChar = True
+            input7.Visible = True
+            field7.Visible = True
+            input8.Visible = True
+            field8.Visible = True
+            field9.Visible = True
+            field10.Visible = True
+            input9.Visible = True
+            input10.Visible = True
+            field7.Text = "Address"
+            field8.Text = "City"
+            field9.Text = "State"
+            field10.Text = "Zipcode"
+            field3.Visible = True
+            input3.Visible = True
+
+
+
+        ElseIf (SelectedItem = "InventoryOrder") Then
+            load_table("select * from InventoryOrder")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            lb_EmployeeRep.Visible = False
+            field_cmb.Visible = False
+            field1.Text = "Inventory Order ID"
+            field2.Text = "EmployeeID"
+            field3.Text = "StoreID"
+            field4.Text = "WarehouseID"
+            field5.Text = "DateOfOrder"
+            field6.Text = "Manager Approval"
+            field4.Visible = True
+            input4.Visible = True
+            field5.Visible = True
+            input5.Visible = True
+            field4.Visible = True
+            field5.Visible = True
+            field6.Visible = True
+            input6.Visible = True
+            input6.UseSystemPasswordChar = False
+            input7.Visible = False
+            field7.Visible = False
+            input8.Visible = False
+            field8.Visible = False
+            field9.Visible = False
+            field10.Visible = False
+            input9.Visible = False
+            input10.Visible = False
+            field3.Visible = True
+            input3.Visible = True
+
+
+
+
+        ElseIf (SelectedItem = "InventoryOrderProduct") Then
+            load_table("select * from InventoryOrderProduct")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            lb_EmployeeRep.Visible = False
+            field_cmb.Visible = False
+            field1.Text = "Inventory Order Product ID"
+            field2.Text = "Inventory Order ID"
+            field3.Text = "Product ID"
+            field4.Text = "Order Quantity"
+            input1.Location = New Point(336, 39)
+            input4.Visible = True
+            field4.Visible = True
+            input6.Visible = False
+            field6.Visible = False
+            field5.Visible = False
+            input5.Visible = False
+            input7.Visible = False
+            field7.Visible = False
+            input8.Visible = False
+            field8.Visible = False
+            field9.Visible = False
+            field10.Visible = False
+            input9.Visible = False
+            input10.Visible = False
+            field3.Visible = True
+            input3.Visible = True
+
+
+
+        ElseIf (SelectedItem = "Products") Then
+            load_table("SELECT * from Products")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            lb_EmployeeRep.Visible = False
+            field_cmb.Visible = False
+            input4.Visible = False
+            input5.Visible = False
+            input6.Visible = False
+            input7.Visible = False
+            input8.Visible = False
+            field4.Visible = False
+            field5.Visible = False
+            field6.Visible = False
+            field7.Visible = False
+            field8.Visible = False
+            field1.Text = "Product ID"
+            field2.Text = "Name"
+            field3.Text = "Price"
+            field3.Visible = True
+            input3.Visible = True
+            field9.Visible = False
+            field10.Visible = False
+            input9.Visible = False
+            input10.Visible = False
+
+
+        ElseIf (SelectedItem = "StoreProduct") Then
+            load_table("SELECT * from StoreProduct")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            lb_EmployeeRep.Visible = False
+            field_cmb.Visible = False
+            input5.Visible = False
+            input6.Visible = False
+            input7.Visible = False
+            input8.Visible = False
+            field5.Visible = False
+            field6.Visible = False
+            field7.Visible = False
+            field8.Visible = False
+            field1.Text = "Store Product ID"
+            field2.Text = "Store ID"
+            field3.Text = "Product ID"
+            field3.Visible = True
+            input3.Visible = True
+            field4.Visible = True
+            input4.Visible = True
+            field4.Text = "Count On Hand"
+            field9.Visible = False
+            field10.Visible = False
+            input9.Visible = False
+            input10.Visible = False
+
+
+
+
+        ElseIf (SelectedItem = "Store") Then
+            load_table("SELECT Store.StoreID StoreID, Store.Name StoreName, Store.Address Address, Employee.Name EmployeeName, Store.ContactPhone EmployeePhone, Store.ContactEmail EmployeeEmail FROM Store INNER JOIN Employee On Store.ContactEmployeeID = Employee.EmployeeID;")
+            Panel1.Visible = True
+            dgv_Inventory.Visible = True
+            dgv_Stores.Location = New Point(12, 464)
+            lb_EmployeeRep.Visible = True
+            field_cmb.Visible = True
+            field_cmb.Text = "Employee Rep."
+            field1.Text = "Store ID"
+            field2.Text = "Store Name"
+            field3.Text = "Store Address"
+            field3.Visible = False
+            input3.Visible = False
+            field4.Visible = False
+            field5.Visible = False
+            field6.Visible = False
+            field7.Visible = True
+            field8.Visible = True
+            input4.Visible = False
+            input5.Visible = False
+            input6.Visible = False
+            input7.Visible = True
+            input8.Visible = True
+            field9.Visible = True
+            field10.Visible = True
+            input9.Visible = True
+            input10.Visible = True
+            field7.Text = "Address"
+            field8.Text = "City"
+            field9.Text = "State"
+            field10.Text = "Zipcode"
+
+
+
+        ElseIf (SelectedItem = "Warehouse") Then
+            load_table("select * from Warehouse")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            field_cmb.Visible = True
+            lb_EmployeeRep.Visible = True
+            field3.Visible = False
+            input3.Visible = False
+            field4.Visible = False
+            input4.Visible = False
+            field5.Visible = False
+            input5.Visible = False
+            field4.Visible = False
+            field5.Visible = False
+            field6.Visible = False
+            input6.Visible = False
+            field7.Visible = True
+            field8.Visible = True
+            input7.Visible = False
+            input8.Visible = False
+            input6.UseSystemPasswordChar = False
+            field1.Text = "Warehouse ID"
+            field2.Text = "Name"
+            input7.Visible = True
+            input8.Visible = True
+            field9.Visible = True
+            field10.Visible = True
+            input9.Visible = True
+            input10.Visible = True
+            field7.Text = "Address"
+            field8.Text = "City"
+            field9.Text = "State"
+            field10.Text = "Zipcode"
+
+
+
+        ElseIf (SelectedItem = "WarehouseProduct") Then
+            load_table("SELECT * from WarehouseProduct")
+            Panel1.Visible = False
+            dgv_Inventory.Visible = False
+            dgv_Stores.Location = New Point(602, 22)
+            lb_EmployeeRep.Visible = False
+            field_cmb.Visible = False
+            input4.Visible = True
+            input5.Visible = False
+            input6.Visible = False
+            input7.Visible = False
+            input8.Visible = False
+            field4.Visible = True
+            field5.Visible = False
+            field6.Visible = False
+            field7.Visible = False
+            field8.Visible = False
+            field1.Text = "Warehouse Product ID"
+            field2.Text = "Warehouse ID"
+            field3.Text = "Product ID"
+            field3.Visible = True
+            input3.Visible = True
+            field9.Visible = False
+            field10.Visible = False
+            input9.Visible = False
+            input10.Visible = False
+            field4.Text = "Count On Hand"
+
+
+
+        End If
     End Sub
 
-
+    Private Sub PlaceOrderBtn_Click(sender As Object, e As EventArgs) Handles PlaceOrderBtn.Click
+        Dim InventoryOrderForm As New InventoryOrderForm
+        InventoryOrderForm.Show()
+    End Sub
 End Class
