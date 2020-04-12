@@ -55,19 +55,21 @@ Public Class LoginForm
                     User.Address = READER(7)
                 End If
 
-                User.ManagerID = READER(8)
+                User.ManagerID = READER(7)
 
-                If Not IsDBNull(READER(9)) Then
-                    User.Password = READER(9)
+                If Not IsDBNull(READER(8)) Then
+                    User.Password = READER(8)
                 Else
                     MessageBox.Show("Request your Manager to give you a Password.")
                     Me.Close()
                 End If
-                User.Password = READER(9)
+                User.Password = READER(8)
 
                 'MessageBox.Show(User.Email)
-                Dim MainMenu As New MainMenuForm
-                MainMenu.Show()
+                'Dim MainMenu As New MainMenuForm
+                'MainMenu.Show()
+                Dim CurrentInventoryForm As New currentInventoryForm
+                CurrentInventoryForm.Show()
                 Me.Close()
             ElseIf count > 1 Then
                     MessageBox.Show("UserName And Password are Duplicate")

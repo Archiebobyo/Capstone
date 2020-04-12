@@ -35,8 +35,6 @@ Partial Class currentInventoryForm
         Me.btn_Update = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.dgv_Inventory = New System.Windows.Forms.DataGridView()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.cmb_Table = New System.Windows.Forms.ComboBox()
         Me.lb_EmployeeRep = New System.Windows.Forms.ComboBox()
         Me.field4 = New System.Windows.Forms.Label()
@@ -49,9 +47,15 @@ Partial Class currentInventoryForm
         Me.input6 = New System.Windows.Forms.TextBox()
         Me.input7 = New System.Windows.Forms.TextBox()
         Me.input8 = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.field9 = New System.Windows.Forms.Label()
+        Me.input9 = New System.Windows.Forms.TextBox()
+        Me.input10 = New System.Windows.Forms.TextBox()
+        Me.field10 = New System.Windows.Forms.Label()
         CType(Me.dgv_Stores, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgv_Inventory, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btn_LoadData
@@ -60,12 +64,14 @@ Partial Class currentInventoryForm
         Me.btn_LoadData.Location = New System.Drawing.Point(172, 417)
         Me.btn_LoadData.Name = "btn_LoadData"
         Me.btn_LoadData.Size = New System.Drawing.Size(157, 41)
-        Me.btn_LoadData.TabIndex = 0
+        Me.btn_LoadData.TabIndex = 13
         Me.btn_LoadData.Text = "Refresh"
         Me.btn_LoadData.UseVisualStyleBackColor = True
         '
         'dgv_Stores
         '
+        Me.dgv_Stores.AllowUserToAddRows = False
+        Me.dgv_Stores.AllowUserToDeleteRows = False
         Me.dgv_Stores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgv_Stores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv_Stores.ColumnHeadersHeight = 30
@@ -73,8 +79,9 @@ Partial Class currentInventoryForm
         Me.dgv_Stores.Location = New System.Drawing.Point(12, 464)
         Me.dgv_Stores.Name = "dgv_Stores"
         Me.dgv_Stores.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
+        Me.dgv_Stores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.dgv_Stores.Size = New System.Drawing.Size(600, 185)
-        Me.dgv_Stores.TabIndex = 1
+        Me.dgv_Stores.TabIndex = 14
         '
         'btn_Insert
         '
@@ -82,7 +89,7 @@ Partial Class currentInventoryForm
         Me.btn_Insert.Location = New System.Drawing.Point(9, 370)
         Me.btn_Insert.Name = "btn_Insert"
         Me.btn_Insert.Size = New System.Drawing.Size(157, 41)
-        Me.btn_Insert.TabIndex = 2
+        Me.btn_Insert.TabIndex = 10
         Me.btn_Insert.Text = "Insert"
         Me.btn_Insert.UseVisualStyleBackColor = True
         '
@@ -102,14 +109,14 @@ Partial Class currentInventoryForm
         Me.input1.Location = New System.Drawing.Point(201, 37)
         Me.input1.Name = "input1"
         Me.input1.Size = New System.Drawing.Size(47, 20)
-        Me.input1.TabIndex = 4
+        Me.input1.TabIndex = 1
         '
         'input2
         '
         Me.input2.Location = New System.Drawing.Point(201, 74)
         Me.input2.Name = "input2"
         Me.input2.Size = New System.Drawing.Size(193, 20)
-        Me.input2.TabIndex = 6
+        Me.input2.TabIndex = 2
         '
         'field2
         '
@@ -126,7 +133,7 @@ Partial Class currentInventoryForm
         Me.input3.Location = New System.Drawing.Point(201, 112)
         Me.input3.Name = "input3"
         Me.input3.Size = New System.Drawing.Size(193, 20)
-        Me.input3.TabIndex = 8
+        Me.input3.TabIndex = 3
         '
         'field3
         '
@@ -142,7 +149,7 @@ Partial Class currentInventoryForm
         '
         Me.field_cmb.AutoSize = True
         Me.field_cmb.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.field_cmb.Location = New System.Drawing.Point(14, 332)
+        Me.field_cmb.Location = New System.Drawing.Point(14, 325)
         Me.field_cmb.Name = "field_cmb"
         Me.field_cmb.Size = New System.Drawing.Size(135, 20)
         Me.field_cmb.TabIndex = 9
@@ -154,7 +161,7 @@ Partial Class currentInventoryForm
         Me.btn_Update.Location = New System.Drawing.Point(9, 417)
         Me.btn_Update.Name = "btn_Update"
         Me.btn_Update.Size = New System.Drawing.Size(157, 41)
-        Me.btn_Update.TabIndex = 11
+        Me.btn_Update.TabIndex = 12
         Me.btn_Update.Text = "Update"
         Me.btn_Update.UseVisualStyleBackColor = True
         '
@@ -164,7 +171,7 @@ Partial Class currentInventoryForm
         Me.Button1.Location = New System.Drawing.Point(172, 370)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(157, 41)
-        Me.Button1.TabIndex = 12
+        Me.Button1.TabIndex = 11
         Me.Button1.Text = "Delete"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -178,48 +185,27 @@ Partial Class currentInventoryForm
         Me.dgv_Inventory.Location = New System.Drawing.Point(602, 22)
         Me.dgv_Inventory.Name = "dgv_Inventory"
         Me.dgv_Inventory.Size = New System.Drawing.Size(665, 267)
-        Me.dgv_Inventory.TabIndex = 13
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.AutoSize = True
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Location = New System.Drawing.Point(618, 313)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(649, 336)
-        Me.GroupBox1.TabIndex = 14
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Inventory Changes"
-        '
-        'Button2
-        '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(241, 19)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(157, 41)
-        Me.Button2.TabIndex = 15
-        Me.Button2.Text = "Save Changes"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.dgv_Inventory.TabIndex = 15
         '
         'cmb_Table
         '
         Me.cmb_Table.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_Table.FormattingEnabled = True
-        Me.cmb_Table.Items.AddRange(New Object() {"InventoryOrderProduct", "Store"})
+        Me.cmb_Table.Items.AddRange(New Object() {"InventoryOrderProduct", "Store", "Employee", "InventoryOrder", "Products", "StoreProduct", "Warehouse", "WarehouseProduct"})
         Me.cmb_Table.Location = New System.Drawing.Point(12, 12)
         Me.cmb_Table.Name = "cmb_Table"
         Me.cmb_Table.Size = New System.Drawing.Size(121, 21)
-        Me.cmb_Table.TabIndex = 16
+        Me.cmb_Table.TabIndex = 0
         '
         'lb_EmployeeRep
         '
         Me.lb_EmployeeRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.lb_EmployeeRep.FormattingEnabled = True
         Me.lb_EmployeeRep.Items.AddRange(New Object() {"Employee", "InventoryOrder", "InventoryOrderProduct", "Products", "Store", "StoreProduct", "Warehouse", "WarehouseProduct"})
-        Me.lb_EmployeeRep.Location = New System.Drawing.Point(203, 334)
+        Me.lb_EmployeeRep.Location = New System.Drawing.Point(201, 327)
         Me.lb_EmployeeRep.Name = "lb_EmployeeRep"
         Me.lb_EmployeeRep.Size = New System.Drawing.Size(121, 21)
-        Me.lb_EmployeeRep.TabIndex = 17
+        Me.lb_EmployeeRep.TabIndex = 9
         '
         'field4
         '
@@ -271,7 +257,7 @@ Partial Class currentInventoryForm
         Me.input4.Location = New System.Drawing.Point(201, 148)
         Me.input4.Name = "input4"
         Me.input4.Size = New System.Drawing.Size(193, 20)
-        Me.input4.TabIndex = 23
+        Me.input4.TabIndex = 4
         Me.input4.Visible = False
         '
         'input5
@@ -279,7 +265,7 @@ Partial Class currentInventoryForm
         Me.input5.Location = New System.Drawing.Point(201, 183)
         Me.input5.Name = "input5"
         Me.input5.Size = New System.Drawing.Size(193, 20)
-        Me.input5.TabIndex = 24
+        Me.input5.TabIndex = 5
         Me.input5.Visible = False
         '
         'input6
@@ -287,7 +273,7 @@ Partial Class currentInventoryForm
         Me.input6.Location = New System.Drawing.Point(201, 219)
         Me.input6.Name = "input6"
         Me.input6.Size = New System.Drawing.Size(193, 20)
-        Me.input6.TabIndex = 25
+        Me.input6.TabIndex = 6
         Me.input6.Visible = False
         '
         'input7
@@ -295,7 +281,7 @@ Partial Class currentInventoryForm
         Me.input7.Location = New System.Drawing.Point(201, 254)
         Me.input7.Name = "input7"
         Me.input7.Size = New System.Drawing.Size(193, 20)
-        Me.input7.TabIndex = 26
+        Me.input7.TabIndex = 7
         Me.input7.Visible = False
         '
         'input8
@@ -303,8 +289,62 @@ Partial Class currentInventoryForm
         Me.input8.Location = New System.Drawing.Point(201, 290)
         Me.input8.Name = "input8"
         Me.input8.Size = New System.Drawing.Size(193, 20)
-        Me.input8.TabIndex = 27
+        Me.input8.TabIndex = 8
         Me.input8.Visible = False
+        '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(250, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(157, 41)
+        Me.Button2.TabIndex = 0
+        Me.Button2.Text = "Save Changes"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.AutoScroll = True
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.Location = New System.Drawing.Point(635, 311)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(632, 338)
+        Me.Panel1.TabIndex = 16
+        '
+        'field9
+        '
+        Me.field9.AutoSize = True
+        Me.field9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.field9.Location = New System.Drawing.Point(447, 288)
+        Me.field9.Name = "field9"
+        Me.field9.Size = New System.Drawing.Size(0, 20)
+        Me.field9.TabIndex = 23
+        '
+        'input9
+        '
+        Me.input9.Location = New System.Drawing.Point(529, 290)
+        Me.input9.Name = "input9"
+        Me.input9.Size = New System.Drawing.Size(86, 20)
+        Me.input9.TabIndex = 24
+        Me.input9.Visible = False
+        '
+        'input10
+        '
+        Me.input10.Location = New System.Drawing.Point(529, 330)
+        Me.input10.Name = "input10"
+        Me.input10.Size = New System.Drawing.Size(86, 20)
+        Me.input10.TabIndex = 26
+        Me.input10.Visible = False
+        '
+        'field10
+        '
+        Me.field10.AutoSize = True
+        Me.field10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.field10.Location = New System.Drawing.Point(447, 328)
+        Me.field10.Name = "field10"
+        Me.field10.Size = New System.Drawing.Size(0, 20)
+        Me.field10.TabIndex = 25
         '
         'currentInventoryForm
         '
@@ -312,6 +352,11 @@ Partial Class currentInventoryForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1279, 661)
+        Me.Controls.Add(Me.input10)
+        Me.Controls.Add(Me.field10)
+        Me.Controls.Add(Me.input9)
+        Me.Controls.Add(Me.field9)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.input8)
         Me.Controls.Add(Me.input7)
         Me.Controls.Add(Me.input6)
@@ -324,7 +369,6 @@ Partial Class currentInventoryForm
         Me.Controls.Add(Me.field4)
         Me.Controls.Add(Me.lb_EmployeeRep)
         Me.Controls.Add(Me.cmb_Table)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgv_Inventory)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_Update)
@@ -342,7 +386,7 @@ Partial Class currentInventoryForm
         Me.Text = "currentInventoryForm"
         CType(Me.dgv_Stores, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgv_Inventory, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -361,8 +405,6 @@ Partial Class currentInventoryForm
     Friend WithEvents btn_Update As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents dgv_Inventory As DataGridView
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Button2 As Button
     Friend WithEvents cmb_Table As ComboBox
     Friend WithEvents lb_EmployeeRep As ComboBox
     Friend WithEvents field4 As Label
@@ -375,4 +417,10 @@ Partial Class currentInventoryForm
     Friend WithEvents input6 As TextBox
     Friend WithEvents input7 As TextBox
     Friend WithEvents input8 As TextBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents field9 As Label
+    Friend WithEvents input9 As TextBox
+    Friend WithEvents input10 As TextBox
+    Friend WithEvents field10 As Label
 End Class
