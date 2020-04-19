@@ -14,23 +14,48 @@ Public Class currentInventoryForm
         If (User.EmployeeType = 0) Then
             ' Everything is fair game
             Me.Text = "Store Manager -- Admin View"
+
+            cmb_Table.Items.Add("InventoryOrderProduct")
+            cmb_Table.Items.Add("Store")
+            cmb_Table.Items.Add("Employee")
+            cmb_Table.Items.Add("InventoryOrder")
+            cmb_Table.Items.Add("Products")
+            cmb_Table.Items.Add("StoreProduct")
+            cmb_Table.Items.Add("Warehouse")
+            cmb_Table.Items.Add("WarehouseProduct")
+
         ElseIf (User.EmployeeType = 1) Then
             ' Can't delete or create stores, but can modify them
             Me.Text = "Store Manager -- Store Manager View"
             Button1.Visible = False
             btn_Insert.Visible = False
+
+            cmb_Table.Items.Add("Store")
+            cmb_Table.Items.Add("Employee")
+            cmb_Table.Items.Add("InventoryOrder")
+            cmb_Table.Items.Add("Products")
+            cmb_Table.Items.Add("Warehouse")
         ElseIf (User.EmployeeType = 2) Then
             ' Can't delete, create, or modify stores, but can view them
             Me.Text = "Store Manager -- Store Employee View"
             Button1.Visible = False
             btn_Insert.Visible = False
             btn_Update.Visible = False
+
+            cmb_Table.Items.Add("Store")
+            cmb_Table.Items.Add("InventoryOrder")
+            cmb_Table.Items.Add("Products")
+            cmb_Table.Items.Add("Warehouse")
         ElseIf (User.EmployeeType = 3) Then
             ' Can't delete, create, or modify stores, but can view them
             Me.Text = "Store Manager -- Warehouse Employee View"
             Button1.Visible = False
             btn_Insert.Visible = False
             btn_Update.Visible = False
+
+            cmb_Table.Items.Add("Store")
+            cmb_Table.Items.Add("InventoryOrder")
+            cmb_Table.Items.Add("Warehouse")
         End If
 
         cmb_Table.SelectedItem = "Store"

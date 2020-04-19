@@ -183,16 +183,15 @@ Partial Class currentInventoryForm
         Me.dgv_Inventory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv_Inventory.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv_Inventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_Inventory.Location = New System.Drawing.Point(602, 22)
+        Me.dgv_Inventory.Location = New System.Drawing.Point(635, 22)
         Me.dgv_Inventory.Name = "dgv_Inventory"
-        Me.dgv_Inventory.Size = New System.Drawing.Size(665, 267)
+        Me.dgv_Inventory.Size = New System.Drawing.Size(632, 267)
         Me.dgv_Inventory.TabIndex = 15
         '
         'cmb_Table
         '
         Me.cmb_Table.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_Table.FormattingEnabled = True
-        Me.cmb_Table.Items.AddRange(New Object() {"InventoryOrderProduct", "Store", "Employee", "InventoryOrder", "Products", "StoreProduct", "Warehouse", "WarehouseProduct"})
         Me.cmb_Table.Location = New System.Drawing.Point(12, 12)
         Me.cmb_Table.Name = "cmb_Table"
         Me.cmb_Table.Size = New System.Drawing.Size(121, 21)
@@ -350,11 +349,11 @@ Partial Class currentInventoryForm
         'PlaceOrderBtn
         '
         Me.PlaceOrderBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlaceOrderBtn.Location = New System.Drawing.Point(433, 370)
+        Me.PlaceOrderBtn.Location = New System.Drawing.Point(489, 370)
         Me.PlaceOrderBtn.Name = "PlaceOrderBtn"
-        Me.PlaceOrderBtn.Size = New System.Drawing.Size(182, 41)
+        Me.PlaceOrderBtn.Size = New System.Drawing.Size(126, 41)
         Me.PlaceOrderBtn.TabIndex = 27
-        Me.PlaceOrderBtn.Text = "Place Order"
+        Me.PlaceOrderBtn.Text = "Orders"
         Me.PlaceOrderBtn.UseVisualStyleBackColor = True
         '
         'currentInventoryForm

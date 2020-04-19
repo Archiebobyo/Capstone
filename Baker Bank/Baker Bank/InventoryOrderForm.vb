@@ -7,9 +7,10 @@ Public Class InventoryOrderForm
     Dim StoreID As Integer
     Dim InventoryOrderID As Integer
     Dim InventoryOrderProductID As Integer
+    Dim OrderID As Integer
 
     Private Sub InventoryOrderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        connectToDB()
+        'connectToDB()
         load_Warehouse()
 
         If IsDBNull(User.StoreID) Then
@@ -27,10 +28,35 @@ Public Class InventoryOrderForm
         dgv_Warehouse.BackgroundColor = dgv_Warehouse.DefaultCellStyle.BackColor
         dgv_Inventory.BackgroundColor = dgv_Inventory.DefaultCellStyle.BackColor
 
+        If User.EmployeeType = 0 Then
+            cmb_Order.Items.Add("Warehouse Inventory")
+            cmb_Order.Items.Add("Current Orders")
+            cmb_Order.Visible = True
+
+            deleteOrderBtn.Visible = True
+            placeOrderBtn.Visible = True
+            ApprovalBtn.Visible = True
+            ShipOrderBtn.Visible = True
+            OrderReciviedBtn.Visible = True
+        ElseIf User.EmployeeType = 1 Then
+            cmb_Order.Items.Add("InventoryOrderProduct")
+            cmb_Order.Items.Add("Current Orders")
+            cmb_Order.Visible = True
+
+            deleteOrderBtn.Visible = True
+            placeOrderBtn.Visible = True
+            ApprovalBtn.Visible = True
+            OrderReciviedBtn.Visible = True
+        ElseIf User.EmployeeType = 2 Then
+            placeOrderBtn.Visible = True
+        Else
+            ShipOrderBtn.Visible = True
+        End If
+
 
     End Sub
 
-    Private Sub connectToDB()
+    Private Sub ConnectToDB()
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
 
@@ -46,64 +72,133 @@ Public Class InventoryOrderForm
     End Sub
 
     Private Sub dgv_Warehouse_SelectionChanged(sender As Object, e As EventArgs) Handles dgv_Warehouse.SelectionChanged
-        WarehouseID = dgv_Warehouse.CurrentCell.RowIndex
+        Dim SelectedItem As String
+        SelectedItem = cmb_Order.SelectedItem
 
-        MysqlConn = New MySqlConnection
-        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
-        Dim READER As MySqlDataReader
+        If (SelectedItem = "Current Orders") Then
+            If dgv_Warehouse.CurrentCell Is Nothing Then
+                Return
+            Else
+                OrderID = CInt(dgv_Warehouse.CurrentRow.Cells(0).Value)
+            End If
 
-        Try
-            MysqlConn.Open()
-            Dim query As String
-            query = "SELECT Warehouse.WarehouseID WarehouseID, Warehouse.Name WarehouseName, Warehouse.Address Address, Employee.Name EmployeeName FROM Warehouse INNER JOIN Employee On Warehouse.ContactEmployeeID = Employee.EmployeeID WHERE Warehouse.WarehouseID = '" & WarehouseID & "';"
-            COMMAND = New MySqlCommand(query, MysqlConn)
-            READER = COMMAND.ExecuteReader
+            MysqlConn = New MySqlConnection
+            MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+            Dim READER As MySqlDataReader
 
-            While READER.Read()
-                WarehouseID = READER(0)
-                CurrentWarehouseNameLbl.Text = READER(1)
-            End While
+            Try
+                MysqlConn.Open()
+                Dim query As String
+                query = "SELECT Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, StoreProduct.CountOnHand InStore, Store.StoreID, StoreProduct.ProductID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN WarehouseProduct On Warehouse.WarehouseID = WarehouseProduct.WarehouseID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID INNER JOIN StoreProduct On Store.StoreID = StoreProduct.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = StoreProduct.ProductID AND Products.ProductID = WarehouseProduct.ProductID;"
+                COMMAND = New MySqlCommand(query, MysqlConn)
+                READER = COMMAND.ExecuteReader
 
-            MysqlConn.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        Finally
-            MysqlConn.Dispose()
-        End Try
+                'While READER.Read()
+                'WarehouseID = READER(0)
+                'CurrentWarehouseNameLbl.Text = READER(1)
+                'End While
+
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+        Else
+            If dgv_Warehouse.CurrentCell Is Nothing Then
+                Return
+            Else
+                WarehouseID = CInt(dgv_Warehouse.CurrentCell.RowIndex)
+            End If
+
+
+            MysqlConn = New MySqlConnection
+            MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+            Dim READER As MySqlDataReader
+
+            Try
+                MysqlConn.Open()
+                Dim query As String
+                query = "SELECT Warehouse.WarehouseID WarehouseID, Warehouse.Name WarehouseName, Warehouse.Address Address, Employee.Name EmployeeName FROM Warehouse INNER JOIN Employee On Warehouse.ContactEmployeeID = Employee.EmployeeID WHERE Warehouse.WarehouseID = '" & WarehouseID & "';"
+                COMMAND = New MySqlCommand(query, MysqlConn)
+                READER = COMMAND.ExecuteReader
+
+                While READER.Read()
+                    WarehouseID = READER(0)
+                    CurrentWarehouseNameLbl.Text = READER(1)
+                End While
+
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+        End If
+
 
         load_inventory()
 
     End Sub
 
     Private Sub load_Warehouse()
+        Dim SelectedItem As String
+        SelectedItem = cmb_Order.SelectedItem
+
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
         Dim SDA As New MySqlDataAdapter
         Dim dbDataSet As New DataTable
         Dim bSource As New BindingSource
 
-        Try
-            MysqlConn.Open()
-            Dim Query As String
-            Query = "SELECT Warehouse.WarehouseID WarehouseID, Warehouse.Name WarehouseName, Warehouse.Address Address, Employee.Name EmployeeName, Warehouse.ContactPhone EmployeePhone, Warehouse.ContactEmail EmployeeEmail FROM Warehouse INNER JOIN Employee On Warehouse.ContactEmployeeID = Employee.EmployeeID;"
-            COMMAND = New MySqlCommand(Query, MysqlConn)
-            SDA.SelectCommand = COMMAND
-            SDA.Fill(dbDataSet)
-            bSource.DataSource = dbDataSet
-            dgv_Warehouse.DataSource = bSource
-            dgv_Warehouse.Columns(0).Visible = False
+        If (SelectedItem = "Current Orders") Then
+            Try
+                MysqlConn.Open()
+                Dim Query As String
+                Query = "SELECT InventoryOrder.InventoryOrderID InventoryOrderID, InventoryOrder.DateOfOrder DateOfOrder, Employee.Name EmployeeName, Warehouse.Name WarehouseName,  InventoryOrder.InventoryOrderState StateOfOrder FROM InventoryOrder INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN Employee On InventoryOrder.EmployeeID = Employee.EmployeeID INNER Join Store On InventoryOrder.StoreID = Store.StoreID WHERE Store.StoreID = '" & User.StoreID & "';"
+                COMMAND = New MySqlCommand(Query, MysqlConn)
+                SDA.SelectCommand = COMMAND
+                SDA.Fill(dbDataSet)
+                bSource.DataSource = dbDataSet
+                dgv_Warehouse.DataSource = bSource
+                dgv_Warehouse.Columns(0).Visible = False
 
-            SDA.Update(dbDataSet)
+                SDA.Update(dbDataSet)
 
-            MysqlConn.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        Finally
-            MysqlConn.Dispose()
-        End Try
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+        Else
+            Try
+                MysqlConn.Open()
+                Dim Query As String
+                Query = "SELECT Warehouse.WarehouseID WarehouseID, Warehouse.Name WarehouseName, Warehouse.Address Address, Employee.Name EmployeeName, Warehouse.ContactPhone EmployeePhone, Warehouse.ContactEmail EmployeeEmail FROM Warehouse INNER JOIN Employee On Warehouse.ContactEmployeeID = Employee.EmployeeID;"
+                COMMAND = New MySqlCommand(Query, MysqlConn)
+                SDA.SelectCommand = COMMAND
+                SDA.Fill(dbDataSet)
+                bSource.DataSource = dbDataSet
+                dgv_Warehouse.DataSource = bSource
+                dgv_Warehouse.Columns(0).Visible = False
+
+                SDA.Update(dbDataSet)
+
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+        End If
+
     End Sub
 
     Private Sub load_inventory()
+        Dim SelectedItem As String
+        SelectedItem = cmb_Order.SelectedItem
+
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
         Dim SDA As New MySqlDataAdapter
@@ -111,51 +206,85 @@ Public Class InventoryOrderForm
         Dim bSource As New BindingSource
         Dim x As New Int16
 
+        If (SelectedItem = "Current Orders") Then
+            Try
 
-        Try
-            MysqlConn.Open()
-            Dim Query As String
-            Query = "SELECT Warehouse.WarehouseID WarehouseID, Warehouse.Name WarehouseName, Products.ProductID ProductID, Products.Name Product, WarehouseProduct.CountOnHand Quantity FROM Warehouse INNER JOIN WarehouseProduct On WarehouseProduct.WarehouseID = Warehouse.WarehouseID INNER JOIN Products ON Products.ProductID = WarehouseProduct.ProductID WHERE Warehouse.WarehouseID = '" & WarehouseID & "';"
-            COMMAND = New MySqlCommand(Query, MysqlConn)
-            SDA.SelectCommand = COMMAND
-            SDA.Fill(dbDataSet)
-            bSource.DataSource = dbDataSet
-            dgv_Inventory.DataSource = bSource
+                MysqlConn.Open()
+                Dim Query As String
+                Query = "SELECT Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, StoreProduct.CountOnHand InStore, WarehouseProduct.CountOnHand InWarehouse, StoreProduct.ProductID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN WarehouseProduct On Warehouse.WarehouseID = WarehouseProduct.WarehouseID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID INNER JOIN StoreProduct On Store.StoreID = StoreProduct.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = StoreProduct.ProductID AND Products.ProductID = WarehouseProduct.ProductID;"
+                COMMAND = New MySqlCommand(Query, MysqlConn)
+                SDA.SelectCommand = COMMAND
+                SDA.Fill(dbDataSet)
+                bSource.DataSource = dbDataSet
+                dgv_Inventory.DataSource = bSource
 
-            Dim orderColumn As New DataGridViewColumn()
-            orderColumn.Name = "Order Quantity"
-            orderColumn.HeaderText = "Order Quantity"
-            orderColumn.CellTemplate = New DataGridViewTextBoxCell()
+                Try
+                    dgv_Inventory.Columns.Remove("Order Quantity")
+                    dejaVu = 1 
+                Catch ex As Exception
 
-            If Not dejaVu = 0 Then
-                dejaVu = dejaVu - 1
-                dgv_Inventory.Columns.Insert(1, orderColumn)
-            End If
-
-            dgv_Inventory.Columns(0).Visible = False
-            dgv_Inventory.Columns(3).Visible = False
-
-            dgv_Inventory.Columns(0).ReadOnly = True
-            dgv_Inventory.Columns(1).ReadOnly = False
-            dgv_Inventory.Columns(2).ReadOnly = True
-            dgv_Inventory.Columns(3).ReadOnly = True
-            dgv_Inventory.Columns(4).ReadOnly = True
-            dgv_Inventory.Columns(5).ReadOnly = True
+                End Try
 
 
-            SDA.Update(dbDataSet)
+                SDA.Update(dbDataSet)
 
-            MysqlConn.Close()
+                MysqlConn.Close()
 
 
 
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        Finally
-            MysqlConn.Dispose()
-        End Try
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+        Else
+            Try
+                MysqlConn.Open()
+                Dim Query As String
+                Query = "SELECT Warehouse.WarehouseID WarehouseID, Warehouse.Name WarehouseName, Products.ProductID ProductID, Products.Name Product, WarehouseProduct.CountOnHand Quantity FROM Warehouse INNER JOIN WarehouseProduct On WarehouseProduct.WarehouseID = Warehouse.WarehouseID INNER JOIN Products ON Products.ProductID = WarehouseProduct.ProductID WHERE Warehouse.WarehouseID = '" & WarehouseID & "';"
+                COMMAND = New MySqlCommand(Query, MysqlConn)
+                SDA.SelectCommand = COMMAND
+                SDA.Fill(dbDataSet)
+                bSource.DataSource = dbDataSet
+                dgv_Inventory.DataSource = bSource
+
+                Dim orderColumn As New DataGridViewColumn()
+                orderColumn.Name = "Order Quantity"
+                orderColumn.HeaderText = "Order Quantity"
+                orderColumn.CellTemplate = New DataGridViewTextBoxCell()
+
+                If Not dejaVu = 0 Then
+                    dejaVu = dejaVu - 1
+                    dgv_Inventory.Columns.Insert(1, orderColumn)
+                End If
+
+                dgv_Inventory.Columns("ProductID").Visible = False
+                dgv_Inventory.Columns("WarehouseID").Visible = False
+                dgv_Inventory.Columns("WarehouseName").Visible = False
+
+                dgv_Inventory.Columns("ProductID").ReadOnly = True
+                dgv_Inventory.Columns("WarehouseID").ReadOnly = True
+                dgv_Inventory.Columns("WarehouseName").ReadOnly = True
+                dgv_Inventory.Columns("Order Quantity").ReadOnly = False
+                dgv_Inventory.Columns("Product").ReadOnly = True
+                dgv_Inventory.Columns("Quantity").ReadOnly = True
+
+
+                SDA.Update(dbDataSet)
+
+                MysqlConn.Close()
+
+
+
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+        End If
+
     End Sub
-    Dim dejaVu As Int32 = 2
+    Dim dejaVu As Int32 = 1
     Private Sub placeOrderBtn_Click(sender As Object, e As EventArgs) Handles placeOrderBtn.Click
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
@@ -202,9 +331,10 @@ Public Class InventoryOrderForm
         Try
             MysqlConn.Open()
             Dim query As String
+            Dim today As Date
+            today.Date.ToString("yyyy/MM/dd")
 
-
-            query = "insert into mydb.InventoryOrder (InventoryOrderID, EmployeeID, StoreID, WarehouseID, DateOfOrder, ManagerApporval) values ('" & InventoryOrderID & "','" & User.EmployeeID & "', '" & StoreID & "', '" & WarehouseID & "', '" & CurrentDateLbl.Text & "', 'Pending')"
+            query = "insert into mydb.InventoryOrder (InventoryOrderID, EmployeeID, StoreID, WarehouseID, DateOfOrder, InventoryOrderState) values ('" & InventoryOrderID & "','" & User.EmployeeID & "', '" & StoreID & "', '" & WarehouseID & "', '" & today & "', '0')"
             COMMAND = New MySqlCommand(query, MysqlConn)
             READER = COMMAND.ExecuteReader
 
@@ -216,24 +346,15 @@ Public Class InventoryOrderForm
             InventoryOrderID = COMMAND.ExecuteScalar
 
             MysqlConn.Close()
-            Dim x As Integer
-            x = dgv_Inventory.Rows.Count - 1
-            Dim y As Integer
-            y = 0
 
             For Each row As DataGridViewRow In dgv_Inventory.Rows
-                If Not row.Cells(1).Value Is Nothing AndAlso Not row.Cells(1).Value Is DBNull.Value AndAlso y <= x Then
+                If Not row.Cells("Order Quantity").Value Is Nothing AndAlso Not row.Cells("Order Quantity").Value Is DBNull.Value Then
                     MysqlConn.Open()
-                    Dim ProductID As Integer
-                    ProductID = row.Cells(3).Value
-                    Dim OrderQuantity As Integer
-                    OrderQuantity = row.Cells(1).Value
-                    query = "insert into mydb.InventoryOrderProduct (InventoryOrderProductID, InventoryOrderID, ProductID, OrderQuantity) values ('" & InventoryOrderProductID & "','" & InventoryOrderID & "', '" & ProductID & "', '" & OrderQuantity & "')"
+                    query = "insert into mydb.InventoryOrderProduct (InventoryOrderProductID, InventoryOrderID, ProductID, OrderQuantity) values ('" & InventoryOrderProductID & "','" & InventoryOrderID & "', '" & row.Cells("ProductID").Value & "', '" & row.Cells("Order Quantity").Value & "')"
                     COMMAND = New MySqlCommand(query, MysqlConn)
                     READER = COMMAND.ExecuteReader
                     MysqlConn.Close()
                     InventoryOrderProductID += 1
-                    y += 1
                 End If
             Next
 
@@ -245,6 +366,153 @@ Public Class InventoryOrderForm
         Finally
             MysqlConn.Dispose()
         End Try
+
     End Sub
+
+    Private Sub ApprovalBtn_Click(sender As Object, e As EventArgs) Handles ApprovalBtn.Click
+        If dgv_Warehouse.CurrentCell Is Nothing Then
+            Return
+        Else
+            InventoryOrderID = CInt(dgv_Warehouse.CurrentRow.Cells(0).Value)
+        End If
+
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+
+
+            query = "UPDATE InventoryOrder SET InventoryOrderState = 1 WHERE InventoryOrderID = '" & InventoryOrderID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+        load_Warehouse()
+        load_inventory()
+    End Sub
+    Private Sub ShipOrderBtn_Click(sender As Object, e As EventArgs) Handles ShipOrderBtn.Click
+        If dgv_Warehouse.CurrentCell Is Nothing Then
+            Return
+        Else
+            InventoryOrderID = CInt(dgv_Warehouse.CurrentRow.Cells(0).Value)
+        End If
+
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+
+
+            query = "UPDATE InventoryOrder SET InventoryOrderState = 2 WHERE InventoryOrderID = '" & InventoryOrderID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+        load_Warehouse()
+        load_inventory()
+    End Sub
+
+    Private Sub OrderReciviedBtn_Click(sender As Object, e As EventArgs) Handles OrderReciviedBtn.Click
+        If dgv_Warehouse.CurrentCell Is Nothing Then
+            Return
+        Else
+            InventoryOrderID = CInt(dgv_Warehouse.CurrentRow.Cells(0).Value)
+        End If
+
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+
+        Try
+            MysqlConn.Open()
+            Dim query As String
+
+
+            query = "UPDATE InventoryOrder SET InventoryOrderState = 3 WHERE InventoryOrderID = '" & InventoryOrderID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+        load_Warehouse()
+        load_inventory()
+    End Sub
+    Private Sub deleteOrderBtn_Click(sender As Object, e As EventArgs) Handles deleteOrderBtn.Click
+        MysqlConn = New MySqlConnection
+        MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
+        Dim READER As MySqlDataReader
+        Dim query As String
+
+        If dgv_Warehouse.CurrentRow Is Nothing Then
+            MysqlConn.Open()
+
+            query = "select Min(InventoryOrder.InventoryOrderID) from mydb.InventoryOrder"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            InventoryOrderID = COMMAND.ExecuteScalar
+
+            MysqlConn.Close()
+        Else
+            InventoryOrderID = dgv_Warehouse.CurrentRow.Cells(0).Value
+        End If
+
+
+
+        Try
+            MysqlConn.Open()
+
+
+
+            query = "DELETE FROM InventoryOrderProduct WHERE InventoryOrderID = '" & InventoryOrderID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+            MysqlConn.Open()
+
+            query = "DELETE FROM InventoryOrder WHERE InventoryOrderID = '" & InventoryOrderID & "'"
+            COMMAND = New MySqlCommand(query, MysqlConn)
+            READER = COMMAND.ExecuteReader
+
+            MysqlConn.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            MysqlConn.Dispose()
+        End Try
+        load_Warehouse()
+        load_inventory()
+
+    End Sub
+    Private Sub cmb_Order_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_Order.SelectedIndexChanged
+        Dim SelectedItem As String
+        SelectedItem = cmb_Order.SelectedItem
+
+
+        load_Warehouse()
+        load_inventory()
+        'dgv_Warehouse.Rows(0).Selected = True
+    End Sub
+
 
 End Class
