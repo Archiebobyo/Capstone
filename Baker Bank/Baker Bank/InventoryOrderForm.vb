@@ -331,10 +331,9 @@ Public Class InventoryOrderForm
         Try
             MysqlConn.Open()
             Dim query As String
-            Dim today As Date
-            today.Date.ToString("yyyy/MM/dd")
 
-            query = "insert into mydb.InventoryOrder (InventoryOrderID, EmployeeID, StoreID, WarehouseID, DateOfOrder, InventoryOrderState) values ('" & InventoryOrderID & "','" & User.EmployeeID & "', '" & StoreID & "', '" & WarehouseID & "', '" & today & "', '0')"
+
+            query = "insert into mydb.InventoryOrder (InventoryOrderID, EmployeeID, StoreID, WarehouseID, DateOfOrder, InventoryOrderState) values ('" & InventoryOrderID & "','" & User.EmployeeID & "', '" & StoreID & "', '" & WarehouseID & "', '" & CurrentDateLbl.Text & "', '0')"
             COMMAND = New MySqlCommand(query, MysqlConn)
             READER = COMMAND.ExecuteReader
 
