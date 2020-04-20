@@ -63,7 +63,6 @@ Partial Class LoginForm
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(173, 20)
         Me.TextBox1.TabIndex = 3
-        Me.TextBox1.Text = "jcamacho@uwf.edu"
         '
         'TextBox2
         '
@@ -71,7 +70,6 @@ Partial Class LoginForm
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(173, 20)
         Me.TextBox2.TabIndex = 4
-        Me.TextBox2.Text = "Josh"
         '
         'Button2
         '

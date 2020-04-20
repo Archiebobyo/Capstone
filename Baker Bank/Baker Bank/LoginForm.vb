@@ -23,6 +23,7 @@ Public Class LoginForm
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
         Dim READER As MySqlDataReader
+        Dim newPassword As String
         Try
             MysqlConn.Open()
             Dim Query As String
@@ -64,6 +65,9 @@ Public Class LoginForm
                     Me.Close()
                 End If
                 User.Password = READER(8)
+
+
+
 
                 'MessageBox.Show(User.Email)
                 'Dim MainMenu As New MainMenuForm

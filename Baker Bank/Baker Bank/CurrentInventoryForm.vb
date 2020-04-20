@@ -222,6 +222,27 @@ Public Class currentInventoryForm
         Dim WarehouseID As Integer
         Dim WarehouseProductID As Integer
 
+        input1.Text.Replace("""", "")
+        input2.Text.Replace("""", "")
+        input3.Text.Replace("""", "")
+        input4.Text.Replace("""", "")
+        input5.Text.Replace("""", "")
+        input6.Text.Replace("""", "")
+        input7.Text.Replace("""", "")
+        input8.Text.Replace("""", "")
+        input9.Text.Replace("""", "")
+        input10.Text.Replace("""", "")
+        input1.Text.Replace("'", "")
+        input2.Text.Replace("'", "")
+        input3.Text.Replace("'", "")
+        input4.Text.Replace("'", "")
+        input5.Text.Replace("'", "")
+        input6.Text.Replace("'", "")
+        input7.Text.Replace("'", "")
+        input8.Text.Replace("'", "")
+        input9.Text.Replace("'", "")
+        input10.Text.Replace("'", "")
+
 
 
         If (SelectedItem = "Store") Then
@@ -432,8 +453,7 @@ Public Class currentInventoryForm
             Try
                 MysqlConn.Open()
                 Dim query As String
-                query = "insert into mydb.Employee (EmployeeID, Name, EmployeeType, Phone, Email, Password, Address, City, State, Zip) values ('" & EmployeeID & "', '" & input2.Text & "', '" & input3.Text & "', '" & input4.Text & "', '" & input5.Text & "', '" & input6.Text & ", '" & input7.Text & "', '" & "', '" & input8.Text & "', '" & input9.text & "')"
-                MessageBox.Show(query)
+                query = "insert into mydb.Employee (EmployeeID, Name, EmployeeType, Phone, Email, Password, Address, City, State, Zip) values ('" & EmployeeID & "', '" & input2.Text & "', '" & input3.Text & "', '" & input4.Text & "', '" & input5.Text & "', '" & input6.Text & "', '" & input7.Text & "', '" & input8.Text & "', '" & input9.Text & "', '" & input10.Text & "')"
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
                 Dim count As Integer
@@ -467,8 +487,7 @@ Public Class currentInventoryForm
             Try
                 MysqlConn.Open()
                 Dim query As String
-                query = "insert into mydb.InventoryOrder (InventoryOrderID, EmployeeID, StoreID, WarehouseID, DateofOrder, ManagerApporval) values ('" & InventoryOrderID & "', '" & input2.Text & "', '" & input3.Text & "', '" & input4.Text & "', '" & input5.Text & "', '" & input6.Text & "')"
-                MessageBox.Show(query)
+                query = "insert into mydb.InventoryOrder (InventoryOrderID, EmployeeID, StoreID, WarehouseID, DateofOrder, InventoryOrderState) values ('" & InventoryOrderID & "', '" & input2.Text & "', '" & input3.Text & "', '" & input4.Text & "', '" & input5.Text & "', '" & input6.Text & "')"
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
                 Dim count As Integer
@@ -503,7 +522,6 @@ Public Class currentInventoryForm
                 MysqlConn.Open()
                 Dim query As String
                 query = "insert into mydb.Products (ProductID, Name, Price) values ('" & ProductID & "', '" & input2.Text & "', '" & input3.Text & "')"
-                MessageBox.Show(query)
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
                 Dim count As Integer
@@ -537,7 +555,6 @@ Public Class currentInventoryForm
                 MysqlConn.Open()
                 Dim query As String
                 query = "insert into mydb.StoreProduct (StoreProductID, StoreID, ProductID, CountOnHand) values ('" & StoreProductID & "', '" & input2.Text & "', '" & input3.Text & "', '" & input4.Text & "')"
-                MessageBox.Show(query)
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
                 Dim count As Integer
@@ -571,7 +588,6 @@ Public Class currentInventoryForm
                 MysqlConn.Open()
                 Dim query As String
                 query = "insert into mydb.WarehouseProduct (WarehouseProductID, WarehouseID, ProductID, CountOnHand) values ('" & WarehouseProductID & "', '" & input2.Text & "', '" & input3.Text & "', '" & input4.Text & "')"
-                MessageBox.Show(query)
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
                 Dim count As Integer
@@ -606,6 +622,27 @@ Public Class currentInventoryForm
         Dim SelectedItem As String
         SelectedItem = cmb_Table.SelectedItem
 
+        input1.Text.Replace("""", "")
+        input2.Text.Replace("""", "")
+        input3.Text.Replace("""", "")
+        input4.Text.Replace("""", "")
+        input5.Text.Replace("""", "")
+        input6.Text.Replace("""", "")
+        input7.Text.Replace("""", "")
+        input8.Text.Replace("""", "")
+        input9.Text.Replace("""", "")
+        input10.Text.Replace("""", "")
+        input1.Text.Replace("'", "")
+        input2.Text.Replace("'", "")
+        input3.Text.Replace("'", "")
+        input4.Text.Replace("'", "")
+        input5.Text.Replace("'", "")
+        input6.Text.Replace("'", "")
+        input7.Text.Replace("'", "")
+        input8.Text.Replace("'", "")
+        input9.Text.Replace("'", "")
+        input10.Text.Replace("'", "")
+
         If (SelectedItem = "InventoryOrderProduct") Then
             Try
                 MysqlConn.Open()
@@ -626,7 +663,7 @@ Public Class currentInventoryForm
             Try
                 MysqlConn.Open()
                 Dim query As String
-                query = "update Employee set Name = '" & input2.Text & "', EmployeeType = '" & input3.Text & "', Phone = '" & input4.Text & "', Email = '" & input5.Text & "', Password = '" & input6.Text & "', Address = '" & input7.Text & "', City = '" & input8.Text & "', State = '" & input9.Text & "', Zipcode = '" & input10.Text & "' WHERE EmployeeID = '" & IDRow & "'"
+                query = "update Employee set Name = '" & input2.Text & "', EmployeeType = '" & input3.Text & "', Phone = '" & input4.Text & "', Email = '" & input5.Text & "', Password = '" & input6.Text & "', Address = '" & input7.Text & "', City = '" & input8.Text & "', State = '" & input9.Text & "', Zip = '" & input10.Text & "' WHERE EmployeeID = '" & IDRow & "'"
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
 
@@ -642,7 +679,7 @@ Public Class currentInventoryForm
             Try
                 MysqlConn.Open()
                 Dim query As String
-                query = "update InventoryOrder set EmployeeID = '" & input2.Text & "', StoreID = '" & input3.Text & "', WarehouseID = '" & input4.Text & "', DateofOrder = '" & input5.Text & "', ManagerApporval = '" & input6.Text & "' WHERE InventoryOrderID = '" & IDRow & "'"
+                query = "update InventoryOrder set EmployeeID = '" & input2.Text & "', StoreID = '" & input3.Text & "', WarehouseID = '" & input4.Text & "', DateofOrder = '" & input5.Text & "', InventoryOrderState = '" & input6.Text & "' WHERE InventoryOrderID = '" & IDRow & "'"
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
 

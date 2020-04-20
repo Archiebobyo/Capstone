@@ -8,6 +8,7 @@ Public Class InventoryOrderForm
     Dim InventoryOrderID As Integer
     Dim InventoryOrderProductID As Integer
     Dim OrderID As Integer
+    Dim InventoryID As Integer
 
     Private Sub InventoryOrderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'connectToDB()
@@ -75,6 +76,7 @@ Public Class InventoryOrderForm
         Dim SelectedItem As String
         SelectedItem = cmb_Order.SelectedItem
 
+
         If (SelectedItem = "Current Orders") Then
             If dgv_Warehouse.CurrentCell Is Nothing Then
                 Return
@@ -89,7 +91,7 @@ Public Class InventoryOrderForm
             Try
                 MysqlConn.Open()
                 Dim query As String
-                query = "SELECT Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, StoreProduct.CountOnHand InStore, Store.StoreID, StoreProduct.ProductID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN WarehouseProduct On Warehouse.WarehouseID = WarehouseProduct.WarehouseID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID INNER JOIN StoreProduct On Store.StoreID = StoreProduct.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = StoreProduct.ProductID AND Products.ProductID = WarehouseProduct.ProductID;"
+                query = "SELECT Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, Store.StoreID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN WarehouseProduct On Warehouse.WarehouseID = WarehouseProduct.WarehouseID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = WarehouseProduct.ProductID;"
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
 
@@ -140,6 +142,8 @@ Public Class InventoryOrderForm
         load_inventory()
 
     End Sub
+
+
 
     Private Sub load_Warehouse()
         Dim SelectedItem As String
@@ -206,12 +210,18 @@ Public Class InventoryOrderForm
         Dim bSource As New BindingSource
         Dim x As New Int16
 
+        If dgv_Warehouse.CurrentCell Is Nothing Then
+            Return
+        Else
+            OrderID = CInt(dgv_Warehouse.CurrentRow.Cells(0).Value)
+        End If
+
         If (SelectedItem = "Current Orders") Then
             Try
 
                 MysqlConn.Open()
                 Dim Query As String
-                Query = "SELECT Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, StoreProduct.CountOnHand InStore, WarehouseProduct.CountOnHand InWarehouse, StoreProduct.ProductID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN WarehouseProduct On Warehouse.WarehouseID = WarehouseProduct.WarehouseID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID INNER JOIN StoreProduct On Store.StoreID = StoreProduct.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = StoreProduct.ProductID AND Products.ProductID = WarehouseProduct.ProductID;"
+                Query = "SELECT Products.ProductID, Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, Store.StoreID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Warehouse On InventoryOrder.WarehouseID = Warehouse.WarehouseID INNER JOIN WarehouseProduct On Warehouse.WarehouseID = WarehouseProduct.WarehouseID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = WarehouseProduct.ProductID;"
                 COMMAND = New MySqlCommand(Query, MysqlConn)
                 SDA.SelectCommand = COMMAND
                 SDA.Fill(dbDataSet)
@@ -289,6 +299,8 @@ Public Class InventoryOrderForm
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
         Dim READER As MySqlDataReader
+        CurrentDateLbl.Text.Replace("'", "")
+        CurrentDateLbl.Text.Replace("""", "")
 
         Try
             MysqlConn.Open()
@@ -385,6 +397,8 @@ Public Class InventoryOrderForm
 
 
             query = "UPDATE InventoryOrder SET InventoryOrderState = 1 WHERE InventoryOrderID = '" & InventoryOrderID & "'"
+            MessageBox.Show(query)
+
             COMMAND = New MySqlCommand(query, MysqlConn)
             READER = COMMAND.ExecuteReader
 
@@ -429,6 +443,12 @@ Public Class InventoryOrderForm
     End Sub
 
     Private Sub OrderReciviedBtn_Click(sender As Object, e As EventArgs) Handles OrderReciviedBtn.Click
+        Dim StoreID As Integer
+        Dim ProductID As Integer
+        Dim StoreProductID As Integer
+        Dim CountOnHand As Integer
+        Dim Quantity As Integer
+
         If dgv_Warehouse.CurrentCell Is Nothing Then
             Return
         Else
@@ -438,6 +458,8 @@ Public Class InventoryOrderForm
         MysqlConn = New MySqlConnection
         MysqlConn.ConnectionString = "server=bakerybank1.c0sydhyi1pnd.us-east-2.rds.amazonaws.com;userid=admin;password=TINtin343!;database=mydb"
         Dim READER As MySqlDataReader
+
+
 
         Try
             MysqlConn.Open()
@@ -454,6 +476,115 @@ Public Class InventoryOrderForm
         Finally
             MysqlConn.Dispose()
         End Try
+
+        Dim counter As Integer
+        counter = 1
+
+        For Each row As DataGridViewRow In dgv_Inventory.Rows
+            InventoryID = CInt(dgv_Inventory.Rows(counter - 1).Cells(0).Value)
+            CountOnHand = 0
+            Try
+                MysqlConn.Open()
+                Dim query As String
+
+                query = "SELECT Products.ProductID ProductID, Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, Store.StoreID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = '" & InventoryID & "';"
+                MessageBox.Show(query)
+                COMMAND = New MySqlCommand(query, MysqlConn)
+                READER = COMMAND.ExecuteReader
+
+                While READER.Read
+                    ProductID = READER(0)
+                    Quantity = READER(2)
+                    StoreID = READER(3)
+                End While
+
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+
+
+            Try
+                MysqlConn.Open()
+                Dim query As String
+
+                ' josh
+                query = "Select * from StoreProduct where ProductID = '" & ProductID & "' and StoreID = '" & StoreID & "'"
+                COMMAND = New MySqlCommand(query, MysqlConn)
+                READER = COMMAND.ExecuteReader
+
+                While READER.Read
+                    CountOnHand = READER(3)
+                End While
+
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+
+            CountOnHand += Quantity
+
+            Try
+                MysqlConn.Open()
+                Dim Query As String
+                Query = "select MAX(StoreProduct.StoreProductID) from mydb.StoreProduct"
+                COMMAND = New MySqlCommand(Query, MysqlConn)
+                READER = COMMAND.ExecuteReader
+
+                While READER.Read()
+                    StoreProductID = READER(0) + 1
+                End While
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+
+            Try
+                MysqlConn.Open()
+                Dim Query As String
+                Query = "insert into StoreProduct values ('" & StoreProductID & "', '" & StoreID & "', '" & ProductID & "', '" & CountOnHand & "');"
+                MessageBox.Show(Query)
+                COMMAND = New MySqlCommand(Query, MysqlConn)
+                READER = COMMAND.ExecuteReader
+                MysqlConn.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                MysqlConn.Dispose()
+            End Try
+
+            counter += 1
+        Next
+
+
+
+
+
+
+
+
+
+        'Try (IDK why this try-block is here - Josh)
+        '    MysqlConn.Open()
+        '    Dim query As String
+
+
+        '    query = "SELECT * FROM StoreProduct WHERE StoreProduct.StoreProductID = '" & InventoryOrderID & "' AND StoreProduct.StoreID = InventoryOrder.StoreID'"
+        '    COMMAND = New MySqlCommand(query, MysqlConn)
+        '    READER = COMMAND.ExecuteReader
+
+        '    MysqlConn.Close()
+        'Catch ex As Exception
+        '    MessageBox.Show(ex.Message)
+        'Finally
+        '    MysqlConn.Dispose()
+        'End Try
         load_Warehouse()
         load_inventory()
     End Sub

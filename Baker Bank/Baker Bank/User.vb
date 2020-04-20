@@ -61,6 +61,7 @@
         End Set
     End Property
 
+
     Public Shared Property Phone As Int32
         Get
             Return _Phone

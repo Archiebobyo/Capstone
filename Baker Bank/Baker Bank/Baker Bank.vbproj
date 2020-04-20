@@ -116,6 +116,7 @@
     <Compile Include="OrderForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PasswordForm.vb" />
     <Compile Include="User.vb" />
   </ItemGroup>
   <ItemGroup>
