@@ -397,7 +397,6 @@ Public Class InventoryOrderForm
 
 
             query = "UPDATE InventoryOrder SET InventoryOrderState = 1 WHERE InventoryOrderID = '" & InventoryOrderID & "'"
-            MessageBox.Show(query)
 
             COMMAND = New MySqlCommand(query, MysqlConn)
             READER = COMMAND.ExecuteReader
@@ -488,7 +487,6 @@ Public Class InventoryOrderForm
                 Dim query As String
 
                 query = "SELECT Products.ProductID ProductID, Products.Name Name, InventoryOrderProduct.OrderQuantity OrderQuantity, Store.StoreID FROM InventoryOrder INNER JOIN InventoryOrderProduct On InventoryOrder.InventoryOrderID = InventoryOrderProduct.InventoryOrderID INNER JOIN Products On InventoryOrderProduct.ProductID = Products.ProductID INNER JOIN Store On InventoryOrder.StoreID = Store.StoreID WHERE InventoryOrder.InventoryOrderID = '" & OrderID & "' AND Products.ProductID = '" & InventoryID & "';"
-                MessageBox.Show(query)
                 COMMAND = New MySqlCommand(query, MysqlConn)
                 READER = COMMAND.ExecuteReader
 
